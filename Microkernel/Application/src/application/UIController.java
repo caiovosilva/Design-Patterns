@@ -4,10 +4,10 @@ import interfaces.IUIController;
 import interfaces.ICore;
 
 public class UIController implements IUIController {
-    private ICore core;
+    private ICore iCore;
     
-    public UIController(ICore iCore){
-        this.core= iCore;
+    public void initialize(ICore iCore) {
+        this.iCore = iCore;
     }
     
     public boolean createButton(boolean value){

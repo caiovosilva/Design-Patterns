@@ -11,9 +11,7 @@ public class Core implements ICore {
     private IUIController uiController;
     
     public Core(){
-        pluginController = new PluginController(this);
-        dbController = new DBController(this);
-        uiController = new UIController(this);
+        initializeControllers();
     }
     
     public IPluginController getPluginController(){
@@ -26,5 +24,14 @@ public class Core implements ICore {
     
     public IUIController getUIController(){
         return this.uiController;
+    }
+
+    public void initializeControllers() {
+        this.pluginController = new PluginController();
+        this.dbController = new DBController();
+        this.uiController = new UIController();
+        this.pluginController.initialize(this);
+        this.dbController.initialize(this);
+        this.uiController.initialize(this);
     }
 }

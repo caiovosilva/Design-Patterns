@@ -4,13 +4,13 @@ import interfaces.IDBController;
 import interfaces.ICore;
 
 public class DBController implements IDBController{
-    private ICore core;
-    
-    public DBController(ICore core){
-        this.core = core;
-    }
+    private ICore iCore;
     
     public boolean connectDB(){
         return true;
+    }
+
+    public void initialize(ICore icore) {
+        this.iCore = icore;
     }
 }

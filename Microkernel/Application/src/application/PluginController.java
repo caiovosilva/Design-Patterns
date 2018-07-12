@@ -4,10 +4,10 @@ import interfaces.IPluginController;
 import interfaces.ICore;
 
 public class PluginController implements IPluginController {
-    private ICore core;
+    private ICore iCore;
     
-    public PluginController(ICore core){
-        this.core = core;
+    public void initialize(ICore iCore) {
+        this.iCore = iCore;
     }
     
     public boolean applyPlugin(){
