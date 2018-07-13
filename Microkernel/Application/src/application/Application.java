@@ -5,6 +5,8 @@
  */
 package application;
 
+import interfaces.ICore;
+
 /**
  *
  * @author caiov
@@ -15,7 +17,11 @@ public class Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        ICore core = new Core();
+        System.out.println(core);
+        System.out.println(core.getDBController());
+        System.out.println(core.getPluginController());
+        System.out.println(core.getUIController());
     }
     
 }
