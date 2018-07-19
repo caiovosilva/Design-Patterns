@@ -4,6 +4,8 @@
  */
 package blok.gui;
 
+import blok.interfaces.IUIController;
+
 /**
  *
  * @author sandroandrade
@@ -17,8 +19,8 @@ public class Blok {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.setVisible(true);
+                IUIController mainWindow = new MainWindow();
+                //mainWindow.setVisible(true);
             }
         });
     }

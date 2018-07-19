@@ -6,12 +6,13 @@ package blok.gui;
 
 import blok.simulator.Simulator;
 import java.awt.Dimension;
+import blok.interfaces.IUIController;
 
 /**
  *
  * @author sandroandrade
  */
-public class MainWindow extends javax.swing.JFrame {
+public class MainWindow extends javax.swing.JFrame implements IUIController {
 
     /**
      * Creates new form MainWindow
@@ -34,6 +35,7 @@ public class MainWindow extends javax.swing.JFrame {
         mainPanel.setSimulator(simulator);
         simulator.init();
         //simulator.start();
+        setVisible(true);
     }
 
     /**
