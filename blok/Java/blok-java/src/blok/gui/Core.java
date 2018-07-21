@@ -4,13 +4,15 @@
  */
 package blok.gui;
 
+import blok.interfaces.ICore;
 import blok.interfaces.IUIController;
+import blok.simulator.Simulator;
 
 /**
  *
  * @author sandroandrade
  */
-public class Blok {
+public class Core implements ICore{
 
     /**
      * @param args the command line arguments
@@ -21,6 +23,10 @@ public class Blok {
             public void run() {
                 IUIController mainWindow = new MainWindow();
                 //mainWindow.setVisible(true);
+                Simulator simulator = new Simulator(mainPanel);
+                mainPanel.setSimulator(simulator);
+        
+                simulator.init();
             }
         });
     }

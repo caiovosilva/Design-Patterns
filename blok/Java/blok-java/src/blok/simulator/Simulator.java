@@ -4,7 +4,8 @@
  */
 package blok.simulator;
 
-import blok.gui.MainPanel;
+import blok.interfaces.ICore;
+import blok.interfaces.ISimulator;
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -22,7 +23,7 @@ import org.jbox2d.dynamics.contacts.Contact;
  *
  * @author sandroandrade
  */
-public class Simulator implements Runnable, ContactListener {
+public class Simulator implements Runnable, ContactListener, ISimulator {
 
     public Simulator(MainPanel mainPanel) {
         m_mainPanel = mainPanel;
@@ -99,7 +100,7 @@ public class Simulator implements Runnable, ContactListener {
             (contact.getFixtureB().getBody() == m_ground && contact.getFixtureA().getBody() == m_player))
         {
             stop();
-            m_mainPanel.setState(MainPanel.State.YOULOST);
+            m_core.getUIController().setState(MainPanel.State.YOULOST);
         }
     }
 
@@ -120,7 +121,7 @@ public class Simulator implements Runnable, ContactListener {
     private static int B2_VELOCITY_ITERATIONS = 8;
     private static int B2_POSITION_ITERATIONS = 4;
 
-    private MainPanel m_mainPanel;
+    private ICore m_core;
     
     private final ScheduledExecutorService m_scheduler = Executors.newScheduledThreadPool(1);
     private ScheduledFuture<?> m_schedulerHandle = null;

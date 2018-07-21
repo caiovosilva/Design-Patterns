@@ -31,10 +31,7 @@ public class MainWindow extends javax.swing.JFrame implements IUIController {
         setResizable(false);
         pack();
         
-        Simulator simulator = new Simulator(mainPanel);
-        mainPanel.setSimulator(simulator);
-        simulator.init();
-        //simulator.start();
+        
         setVisible(true);
     }
 
