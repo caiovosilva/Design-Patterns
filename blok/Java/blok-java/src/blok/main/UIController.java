@@ -22,7 +22,7 @@ public class UIController implements IUIController {
     
     public UIController(ICore core){
         m_core = core;
-        m_mainWindow = new MainWindow();
+        m_mainWindow = new MainWindow(core);
         Dimension size = new Dimension(1000, 600);
         
         m_mainPanel = new MainPanel(core);

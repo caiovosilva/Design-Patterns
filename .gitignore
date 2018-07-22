@@ -129,3 +129,7 @@ CMakeLists.txt.user*
 /blok java - interfaces/nbproject/private/
 /blok java - interfaces/build/
 /blok java - interfaces/dist/
+/blok/Java/StandardFactory/nbproject/private/
+/blok/Java/StandardFactory/dist/
+/blok/Java/StandardFactory/build/
+/blok/Java/blok-java/dist/

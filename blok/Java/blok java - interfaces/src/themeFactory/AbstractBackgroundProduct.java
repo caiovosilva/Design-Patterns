@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaces;
+package themeFactory;
+
+import java.net.URL;
 
 /**
  *
  * @author caiovosilva
  */
-public interface ICore {
-    ISimulator getSimulator();
-    IUIController getUIController();
-    IGameController getGameController();
+public interface AbstractBackgroundProduct {
+    public URL getImageURL();
 }

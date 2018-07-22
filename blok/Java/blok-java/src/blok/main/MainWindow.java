@@ -4,8 +4,10 @@
  */
 package blok.main;
 
+import interfaces.ICore;
 import java.awt.Dimension;
 import interfaces.IUIController;
+import java.io.File;
 
 /**
  *
@@ -16,8 +18,16 @@ public class MainWindow extends javax.swing.JFrame {
     /**
      * Creates new form MainWindow
      */
-    public MainWindow() {
+    public MainWindow(ICore core) {
+        m_core = core;
         initComponents();    
+        
+        File currentDir = new File("./plugins");
+        String []plugins = currentDir.list();
+        for (int i = 0; i < plugins.length; i++){
+                jThemes.add(plugins[i]);
+        }
+
     }
 
     /**
@@ -31,6 +41,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jThemes = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -38,6 +49,9 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
+
+        jThemes.setText("Themes");
+        jMenuBar1.add(jThemes);
 
         jMenu2.setText("Help");
         jMenuBar1.add(jMenu2);
@@ -51,5 +65,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jThemes;
     // End of variables declaration//GEN-END:variables
+    private ICore m_core;
 }

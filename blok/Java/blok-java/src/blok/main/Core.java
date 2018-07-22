@@ -6,6 +6,7 @@ package blok.main;
 
 import interfaces.ICore;
 import interfaces.IGameController;
+import interfaces.IPluginController;
 import interfaces.ISimulator;
 import interfaces.IUIController;
 
@@ -15,6 +16,7 @@ public class Core implements ICore{
 
 
     public Core(){
+        m_pluginController = new PluginController(this);
         m_uiController = new UIController(this);
         m_gameController = new GameController(this);
         m_simulatorController = new Simulator(this);
@@ -35,7 +37,13 @@ public class Core implements ICore{
         return m_gameController;
     }
     
+    @Override
+    public IPluginController getPluginController(){
+        return m_pluginController;
+    }
+    
     private ISimulator m_simulatorController;
     private IUIController m_uiController;
     private IGameController m_gameController;
+    private IPluginController m_pluginController;
 }
