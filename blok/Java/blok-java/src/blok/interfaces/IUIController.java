@@ -5,11 +5,18 @@
  */
 package blok.interfaces;
 
+import blok.utilities.GameBody;
+import java.util.ArrayList;
+
+
 /**
  *
  * @author caiov
  */
 public interface IUIController {
-    //public void show();
-    
+   
+    public void bodiesCreated(ArrayList<GameBody> bodies);
+    public void bodiesUpdated(ArrayList<GameBody> bodies);
+    public void setPlayerImage(String str);
+    public void update();
 }

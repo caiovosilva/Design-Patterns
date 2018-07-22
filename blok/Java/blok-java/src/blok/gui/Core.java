@@ -5,29 +5,36 @@
 package blok.gui;
 
 import blok.interfaces.ICore;
+import blok.interfaces.IGameController;
+import blok.interfaces.ISimulator;
 import blok.interfaces.IUIController;
 import blok.simulator.Simulator;
 
-/**
- *
- * @author sandroandrade
- */
 public class Core implements ICore{
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                IUIController mainWindow = new MainWindow();
-                //mainWindow.setVisible(true);
-                Simulator simulator = new Simulator(mainPanel);
-                mainPanel.setSimulator(simulator);
-        
-                simulator.init();
-            }
-        });
+
+    public Core(){
+        m_uiController = new UIController(this);
+        m_gameController = new GameController(this);
+        m_simulatorController = new Simulator(this);
+        m_simulatorController.init();
     }
+    @Override
+    public ISimulator getSimulator() {
+        return m_simulatorController;
+    }
+
+    @Override
+    public IUIController getUIController() {
+        return m_uiController;
+    }
+    
+    @Override
+    public IGameController getGameController(){
+        return m_gameController;
+    }
+    
+    private ISimulator m_simulatorController;
+    private IUIController m_uiController;
+    private IGameController m_gameController;
 }

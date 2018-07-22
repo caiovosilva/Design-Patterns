@@ -5,10 +5,16 @@
  */
 package blok.interfaces;
 
+import blok.utilities.GameBody;
+import java.awt.Rectangle;
+
 /**
  *
  * @author caiov
  */
 public interface ISimulator {
-    
+    public void init();
+    public void stop();
+    public void start();
+    public void removeBody(int bodyIndex);
 }

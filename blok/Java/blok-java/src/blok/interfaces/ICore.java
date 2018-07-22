@@ -12,5 +12,5 @@ package blok.interfaces;
 public interface ICore {
     ISimulator getSimulator();
     IUIController getUIController();
-    
+    IGameController getGameController();
 }

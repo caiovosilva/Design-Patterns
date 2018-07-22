@@ -4,7 +4,12 @@
  */
 package blok.gui;
 
+import blok.interfaces.ICore;
+import blok.interfaces.IGameController;
+import blok.interfaces.ISimulator;
+import blok.interfaces.IUIController;
 import blok.simulator.Simulator;
+import blok.utilities.GameBody;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -21,8 +26,6 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
 import javax.swing.ImageIcon;
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
 
 /**
  *
@@ -33,48 +36,22 @@ public class MainPanel extends javax.swing.JPanel implements MouseListener, KeyL
     /**
      * Creates new form MainPanel
      */
-    public MainPanel() {
+    public MainPanel(ICore core) {
+        m_core = core;
         initComponents();
         setFocusable(true);
         addMouseListener(this);
         addKeyListener(this);
         m_playerImage = "images/player" + Math.abs((new Random()).nextInt()%9) + ".png";
-        playWav("sounds/background.wav", -1);
-    }
-
-    final void playWav(final String wavFile, final int times) {
-        (new Thread(new Runnable() {
-        @Override
-        public void run() {
-            try {
-                System.out.println(AudioSystem.getMixerInfo()[1].getName());
-                Clip clip = AudioSystem.getClip();
-                AudioInputStream ais = AudioSystem.getAudioInputStream(new File(wavFile));
-                clip.open(ais);
-                clip.loop(times);
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(MainPanel.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (LineUnavailableException ex) {
-                Logger.getLogger(MainPanel.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (UnsupportedAudioFileException ex) {
-                Logger.getLogger(MainPanel.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(MainPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }})).start();
-    }
-    
-    public void setSimulator(Simulator simulator) {
-        m_simulator = simulator;
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        Body toBeRemoved = null;
-        for (Body body : m_bodyRect.keySet()) {
+        GameBody toBeRemoved = null;
+        for (GameBody body : m_bodyRect.keySet()) {
             java.awt.Rectangle rect = m_bodyRect.get(body);
-            if (rect.contains(e.getPoint()) && m_state == State.RUNNING && rect != m_player) {
-                m_simulator.removeBody(body);
+            if (rect.contains(e.getPoint()) && m_core.getGameController().getState() == IGameController.State.RUNNING && rect != m_player) {
+                m_core.getSimulator().removeBody(body);
                 toBeRemoved = body;
                 break;
             }
@@ -109,50 +86,47 @@ public class MainPanel extends javax.swing.JPanel implements MouseListener, KeyL
 
     @Override
     public void keyReleased(KeyEvent e) {
-        switch(m_state) {
+        switch(m_core.getGameController().getState()) {
             case INITIAL:
-                setState(State.RUNNING);
+                m_core.getGameController().setState(IGameController.State.RUNNING);
                 break;
             case YOUWON:
             case YOULOST:
-                setState(State.INITIAL);
+                m_core.getGameController().setState(IGameController.State.INITIAL);
                 break;
         }
     }
     
-    public void bodiesUpdated(ArrayList<Body> bodies) {
+    public void bodiesUpdated(ArrayList<GameBody> bodies) {
         Dimension size = getSize();
-        for (Body body : bodies) {
-            Vec2 position = body.getPosition();
-            if (body.getUserData() != null)
+        for (GameBody body : bodies) {
+            if (body.getType() == GameBody.Type.PLAYER)
                 // Player
-                m_bodyRect.get(body).setLocation(size.width/2-28 + (int) position.x, size.height/2-28 - (int) position.y);
+                m_bodyRect.get(body).setLocation(size.width/2-28 + (int) body.getRectangle().x, size.height/2-28 - (int) body.getRectangle().y);
             else
                 // Block
-                m_bodyRect.get(body).setLocation(size.width/2-14 + (int) position.x, size.height/2-14 - (int) position.y);
+                m_bodyRect.get(body).setLocation(size.width/2-14 + (int) body.getRectangle().x, size.height/2-14 - (int) body.getRectangle().y);
         }
-
         repaint();
     }
 
-    public void bodiesCreated(ArrayList<Body> bodies) {
+    public void bodiesCreated(ArrayList<GameBody> bodies) {
         m_bodyRect.clear();
         Dimension size = getSize();
-        for (Body body : bodies) {
-            Vec2 position = body.getPosition();
+        for (GameBody body : bodies) {
             Rectangle rectangle = new Rectangle();
-            if (body.getUserData() != null)
+            if (body.getType() == GameBody.Type.PLAYER)
             {
                 // Player
                 rectangle.setRect(-28, -28, 56, 56);
-                rectangle.setLocation(size.width/2-28 + (int) position.x, size.height/2-28 - (int) position.y);
+                rectangle.setLocation(size.width/2-28 + (int) body.getRectangle().x, size.height/2-28 - (int) body.getRectangle().y);
                 m_player = rectangle;
             }
             else
             {
                 // Block
                 rectangle.setRect(-14, -14, 28, 28);
-                rectangle.setLocation(size.width/2-14 + (int) position.x, size.height/2-14 - (int) position.y);
+                rectangle.setLocation(size.width/2-14 + (int) body.getRectangle().x, size.height/2-14 - (int) body.getRectangle().y);
             }
             m_bodyRect.put(body, rectangle);
         }
@@ -192,7 +166,7 @@ public class MainPanel extends javax.swing.JPanel implements MouseListener, KeyL
 
         int x;
         FontMetrics fm = null;
-        if (m_state != State.RUNNING)
+        if (m_core.getGameController().getState() != IGameController.State.RUNNING)
         {
             g2d.setPaint(Color.black);
             g2d.setStroke(new BasicStroke(2));
@@ -204,7 +178,7 @@ public class MainPanel extends javax.swing.JPanel implements MouseListener, KeyL
             g2d.setFont(new Font("Times", Font.BOLD, 18));
             fm = g2d.getFontMetrics();
         }
-        if (m_state == State.INITIAL)
+        if (m_core.getGameController().getState() == IGameController.State.INITIAL)
         {
             x = (int) fm.stringWidth("Remove all the blocks but do not")/2;
             g2d.drawString("Remove all the blocks but do not", size.width/2-x, size.height/2-200-10-5);
@@ -212,17 +186,17 @@ public class MainPanel extends javax.swing.JPanel implements MouseListener, KeyL
             x = fm.stringWidth("let this guy hit the ground, okay ?")/2;
             g2d.drawString("let this guy hit the ground, okay ?", size.width/2-x, size.height/2-200+10-5);
         }
-        if (m_state == State.YOUWON)
+        if (m_core.getGameController().getState() == IGameController.State.YOUWON)
         {
             x = (int) fm.stringWidth("Congratulations ! You won !")/2;
             g2d.drawString("Congratulations ! You won !", size.width/2-x, size.height/2-200);
         }
-        if (m_state == State.YOULOST)
+        if (m_core.getGameController().getState() == IGameController.State.YOULOST)
         {
             x = (int) fm.stringWidth("I'm sorry ! You lost !")/2;
             g2d.drawString("I'm sorry ! You lost !", size.width/2-x, size.height/2-200);
         }
-        if (m_state != State.RUNNING)
+        if (m_core.getGameController().getState() == IGameController.State.RUNNING)
         {
             g2d.setFont(new Font("Times", Font.BOLD, 10));
             fm = g2d.getFontMetrics();
@@ -230,22 +204,11 @@ public class MainPanel extends javax.swing.JPanel implements MouseListener, KeyL
             g2d.drawString("Press any key to start", size.width/2-x, size.height/2-200+30);
         }
     }
-
-    public void setState(State state) {
-        m_state = state;
-        switch(m_state) {
-            case INITIAL:
-                m_playerImage = "images/player" + Math.abs((new Random()).nextInt()%9) + ".png";
-                m_simulator.init();
-                m_simulator.stop();
-                break;
-            case RUNNING:
-                m_simulator.start();
-                break;
-        }
-        repaint();
+    
+    public void setPlayerImage(String str){
+        m_playerImage = str;
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -260,10 +223,11 @@ public class MainPanel extends javax.swing.JPanel implements MouseListener, KeyL
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
-    private Simulator m_simulator;
-    private HashMap<Body, Rectangle> m_bodyRect = new HashMap<Body, Rectangle>();
+    private HashMap<GameBody, Rectangle> m_bodyRect = new HashMap<GameBody, Rectangle>();
     private Rectangle m_player;
-    public enum State {INITIAL, RUNNING, YOUWON, YOULOST};
-    private State m_state = State.INITIAL;
+    //public enum State {INITIAL, RUNNING, YOUWON, YOULOST};
+    //private State m_state = State.INITIAL;
     private String m_playerImage;
+    private ICore m_core;
+    
 }

@@ -12,27 +12,13 @@ import blok.interfaces.IUIController;
  *
  * @author sandroandrade
  */
-public class MainWindow extends javax.swing.JFrame implements IUIController {
+public class MainWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form MainWindow
      */
     public MainWindow() {
-        initComponents();
-        Dimension size = new Dimension(1000, 600);
-
-        MainPanel mainPanel = new MainPanel();
-        mainPanel.setPreferredSize(size);
-        mainPanel.setMinimumSize(size);
-        mainPanel.setMaximumSize(size);
-        mainPanel.setSize(size);
-        setContentPane(mainPanel);
-
-        setResizable(false);
-        pack();
-        
-        
-        setVisible(true);
+        initComponents();    
     }
 
     /**
