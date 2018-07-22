@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package blok.gui;
+package blok.main;
 
-import blok.interfaces.ICore;
-import blok.interfaces.IGameController;
+import interfaces.ICore;
+import interfaces.IGameController;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -74,6 +74,6 @@ public class GameController implements IGameController{
     }
     
     private ICore m_core;   
-    private State m_state;
+    private State m_state = State.INITIAL;
 
 }

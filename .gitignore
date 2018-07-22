@@ -125,3 +125,7 @@ CMakeLists.txt.user*
 
 
 # End of https://www.gitignore.io/api/qt,c++,java,qtcreator
+/blok-java/build/
+/blok java - interfaces/nbproject/private/
+/blok java - interfaces/build/
+/blok java - interfaces/dist/

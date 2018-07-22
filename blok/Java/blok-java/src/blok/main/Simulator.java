@@ -2,13 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package blok.simulator;
+package blok.main;
 
-import blok.gui.MainPanel;
-import blok.interfaces.ICore;
-import blok.interfaces.IGameController;
-import blok.interfaces.ISimulator;
-import blok.interfaces.IUIController;
+import blok.main.MainPanel;
+import interfaces.ICore;
+import interfaces.IGameBody;
+import interfaces.IGameController;
+import interfaces.ISimulator;
+import interfaces.IUIController;
 import blok.utilities.GameBody;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -107,6 +108,19 @@ public class Simulator implements Runnable, ContactListener, ISimulator {
     }
 
     @Override
+    public void removeBody(int bodyIndex) {
+        Body lBody = m_bodies.get(bodyIndex);
+        m_world.destroyBody(lBody);
+        m_bodies.remove(lBody);
+        m_gameBodies.remove(m_gameBodies.get(bodyIndex));
+        if (m_bodies.size() == 2)
+        {
+            stop();
+            m_core.getGameController().setState(IGameController.State.YOUWON);
+        }
+    }
+    
+    @Override
     public void endContact(Contact cntct) {
     }
 
@@ -130,20 +144,7 @@ public class Simulator implements Runnable, ContactListener, ISimulator {
             
     private static World m_world;
     private ArrayList<Body> m_bodies = new ArrayList<Body>();
-    private ArrayList<GameBody> m_gameBodies = new ArrayList<GameBody>();
+    private ArrayList<IGameBody> m_gameBodies = new ArrayList<IGameBody>();
     private Body m_player = null;
-    private Body m_ground = null;
-
-    @Override
-    public void removeBody(int bodyIndex) {
-        Body lBody = m_bodies.get(bodyIndex);
-        m_world.destroyBody(lBody);
-        m_bodies.remove(lBody);
-        m_gameBodies.remove(m_gameBodies.get(bodyIndex));
-        if (m_bodies.size() == 2)
-        {
-            stop();
-            m_core.getGameController().setState(IGameController.State.YOUWON);
-        }
-    }
+    private Body m_ground = null; 
 }

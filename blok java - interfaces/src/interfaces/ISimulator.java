@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package blok.interfaces;
+package interfaces;
 
 /**
  *
- * @author caiov
+ * @author caiovosilva
  */
-public interface ICore {
-    ISimulator getSimulator();
-    IUIController getUIController();
-    IGameController getGameController();
+public interface ISimulator {
+    public void init();
+    public void stop();
+    public void start();
+    public void removeBody(int bodyIndex);
 }

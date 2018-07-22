@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package blok.gui;
+package blok.main;
 
-import blok.interfaces.ICore;
-import blok.interfaces.IGameController;
-import blok.interfaces.ISimulator;
-import blok.interfaces.IUIController;
-import blok.simulator.Simulator;
+import interfaces.ICore;
+import interfaces.IGameBody;
+import interfaces.IGameController;
+import interfaces.ISimulator;
+import interfaces.IUIController;
 import blok.utilities.GameBody;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,17 +48,19 @@ public class MainPanel extends javax.swing.JPanel implements MouseListener, KeyL
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        GameBody toBeRemoved = null;
-        for (GameBody body : m_bodyRect.keySet()) {
-            java.awt.Rectangle rect = m_bodyRect.get(body);
+        IGameBody toBeRemoved = null;
+        int indexCount = 0;
+        for (IGameBody body : m_linkedBodies.keySet()) {
+            java.awt.Rectangle rect = m_linkedBodies.get(body);
+            indexCount++;
             if (rect.contains(e.getPoint()) && m_core.getGameController().getState() == IGameController.State.RUNNING && rect != m_player) {
-                m_core.getSimulator().removeBody(body);
+                m_core.getSimulator().removeBody(indexCount);
                 toBeRemoved = body;
                 break;
             }
         }
         if (toBeRemoved != null)
-            m_bodyRect.remove(toBeRemoved);
+            m_linkedBodies.remove(toBeRemoved);
     }
 
     @Override
@@ -97,23 +100,24 @@ public class MainPanel extends javax.swing.JPanel implements MouseListener, KeyL
         }
     }
     
-    public void bodiesUpdated(ArrayList<GameBody> bodies) {
+    public void bodiesUpdated(ArrayList<IGameBody> bodies) {
         Dimension size = getSize();
-        for (GameBody body : bodies) {
+        for (IGameBody body : bodies) {
             if (body.getType() == GameBody.Type.PLAYER)
                 // Player
-                m_bodyRect.get(body).setLocation(size.width/2-28 + (int) body.getRectangle().x, size.height/2-28 - (int) body.getRectangle().y);
+                m_linkedBodies.get(body).setLocation(size.width/2-28 + (int) body.getRectangle().x, size.height/2-28 - (int) body.getRectangle().y);
             else
                 // Block
-                m_bodyRect.get(body).setLocation(size.width/2-14 + (int) body.getRectangle().x, size.height/2-14 - (int) body.getRectangle().y);
+                m_linkedBodies.get(body).setLocation(size.width/2-14 + (int) body.getRectangle().x, size.height/2-14 - (int) body.getRectangle().y);
         }
         repaint();
     }
 
-    public void bodiesCreated(ArrayList<GameBody> bodies) {
-        m_bodyRect.clear();
+    public void bodiesCreated(ArrayList<IGameBody> bodies) {
+        //m_bodyRect.clear();
+        m_linkedBodies.clear();
         Dimension size = getSize();
-        for (GameBody body : bodies) {
+        for (IGameBody body : bodies) {
             Rectangle rectangle = new Rectangle();
             if (body.getType() == GameBody.Type.PLAYER)
             {
@@ -128,7 +132,8 @@ public class MainPanel extends javax.swing.JPanel implements MouseListener, KeyL
                 rectangle.setRect(-14, -14, 28, 28);
                 rectangle.setLocation(size.width/2-14 + (int) body.getRectangle().x, size.height/2-14 - (int) body.getRectangle().y);
             }
-            m_bodyRect.put(body, rectangle);
+            //m_bodyRect.put(body, rectangle);
+            m_linkedBodies.put(body, rectangle);
         }
         repaint();
     }
@@ -142,7 +147,7 @@ public class MainPanel extends javax.swing.JPanel implements MouseListener, KeyL
         g2d.drawImage(new ImageIcon("images/background.png").getImage(), 0, 0, null);
         g2d.drawImage(new ImageIcon("images/ground.png").getImage(), size.width/2-450, size.height/2-10+260, null);
 
-        for (Rectangle rect : m_bodyRect.values()) {
+        for (Rectangle rect : m_linkedBodies.values()) {
             if (rect != m_player) {
                 // Block
                 try {
@@ -223,7 +228,9 @@ public class MainPanel extends javax.swing.JPanel implements MouseListener, KeyL
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
-    private HashMap<GameBody, Rectangle> m_bodyRect = new HashMap<GameBody, Rectangle>();
+    //private HashMap<GameBody, Rectangle> m_bodyRect = new HashMap<GameBody, Rectangle>();
+    private LinkedHashMap<IGameBody, Rectangle> m_linkedBodies = new LinkedHashMap<IGameBody, Rectangle>();
+
     private Rectangle m_player;
     //public enum State {INITIAL, RUNNING, YOUWON, YOULOST};
     //private State m_state = State.INITIAL;

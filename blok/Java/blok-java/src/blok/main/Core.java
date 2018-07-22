@@ -2,13 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package blok.gui;
+package blok.main;
 
-import blok.interfaces.ICore;
-import blok.interfaces.IGameController;
-import blok.interfaces.ISimulator;
-import blok.interfaces.IUIController;
-import blok.simulator.Simulator;
+import interfaces.ICore;
+import interfaces.IGameController;
+import interfaces.ISimulator;
+import interfaces.IUIController;
+
+
 
 public class Core implements ICore{
 

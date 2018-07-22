@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package blok.gui;
+package blok.main;
 
-import blok.interfaces.ICore;
-import blok.interfaces.IUIController;
 import blok.utilities.GameBody;
+import interfaces.ICore;
+import interfaces.IGameBody;
+import interfaces.IUIController;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class UIController implements IUIController {
     
     
     @Override
-    public void bodiesCreated(ArrayList<GameBody> bodies) {
+    public void bodiesCreated(ArrayList<IGameBody> bodies) {
         m_mainPanel.bodiesCreated(bodies);
     }
     private MainWindow m_mainWindow;
@@ -47,8 +48,8 @@ public class UIController implements IUIController {
     private ICore m_core;
 
     @Override
-    public void bodiesUpdated(ArrayList<GameBody> bodies) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void bodiesUpdated(ArrayList<IGameBody> bodies) {
+        m_mainPanel.bodiesUpdated(bodies);
     }
 
     @Override

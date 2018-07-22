@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package blok.gui;
+package blok.main;
 
-import blok.interfaces.ICore;
+import interfaces.ICore;
+
 
 /**
  *

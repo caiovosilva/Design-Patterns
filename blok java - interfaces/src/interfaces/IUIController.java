@@ -3,20 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package blok.interfaces;
+package interfaces;
 
-import blok.utilities.GameBody;
 import java.util.ArrayList;
-
 
 /**
  *
- * @author caiov
+ * @author caiovosilva
  */
 public interface IUIController {
    
-    public void bodiesCreated(ArrayList<GameBody> bodies);
-    public void bodiesUpdated(ArrayList<GameBody> bodies);
+    public void bodiesCreated(ArrayList<IGameBody> bodies);
+    public void bodiesUpdated(ArrayList<IGameBody> bodies);
     public void setPlayerImage(String str);
     public void update();
 }

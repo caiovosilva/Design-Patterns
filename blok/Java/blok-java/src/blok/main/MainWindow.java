@@ -2,11 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package blok.gui;
+package blok.main;
 
-import blok.simulator.Simulator;
 import java.awt.Dimension;
-import blok.interfaces.IUIController;
+import interfaces.IUIController;
 
 /**
  *
@@ -35,7 +34,7 @@ public class MainWindow extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.GridLayout());
+        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
