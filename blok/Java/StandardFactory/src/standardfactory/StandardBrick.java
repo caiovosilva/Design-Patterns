@@ -15,8 +15,8 @@ import themeFactory.AbstractBrickProduct;
 public class StandardBrick implements AbstractBrickProduct {
 
     @Override
-    public URL getImageURL() {
-        return getClass().getResource("/images/tree.png");
+    public String getImagePath() {
+        return "images/tree.png";
     }
     
 }

@@ -15,8 +15,8 @@ import themeFactory.AbstractBackgroundProduct;
 public class StandardBackground implements AbstractBackgroundProduct{
 
     @Override
-    public URL getImageURL() {
-        return getClass().getResource("images/background.png");
+    public String getImagePath() {
+        return ("images/background.png");
     }
     
 }

@@ -5,12 +5,10 @@
  */
 package themeFactory;
 
-import java.net.URL;
-
 /**
  *
  * @author caiovosilva
  */
 public interface AbstractBackgroundProduct {
-    public URL getImageURL();
+    public String getImagePath();
 }

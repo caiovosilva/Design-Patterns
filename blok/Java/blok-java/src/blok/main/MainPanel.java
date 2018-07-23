@@ -18,6 +18,7 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -144,14 +145,23 @@ public class MainPanel extends javax.swing.JPanel implements MouseListener, KeyL
         Graphics2D g2d = (Graphics2D)g;
         Dimension size = getSize();
         
-        g2d.drawImage(new ImageIcon(m_core.getPluginController().getCurrentBackgroundProduct().getImageURL()).getImage(), 0, 0, null);
-        g2d.drawImage(new ImageIcon(m_core.getPluginController().getCurrentFloorProduct().getImageURL()).getImage(), size.width/2-450, size.height/2-10+260, null);
+        try {
+            String path = m_core.getPluginController().getCurrentBackgroundProduct().getImagePath();
+            URL url = getClass().getClassLoader().getResource("/plugins/StandardFactory/"+path);
+            Image image = ImageIO.read(url);
+            g2d.drawImage(image, 0, 0, null);
+            g2d.drawImage(new ImageIcon(getClass().getResource(m_core.getPluginController().getCurrentFloorProduct().getImagePath())).getImage(), size.width/2-450, size.height/2-10+260, null);
+
+        } catch (IOException ex) {
+            Logger.getLogger(MainPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         for (Rectangle rect : m_linkedBodies.values()) {
             if (rect != m_player) {
                 // Block
                 try {
-                    TexturePaint texturePaint = new TexturePaint(ImageIO.read(new File(m_core.getPluginController().getCurrentBrickProduct().getImageURL().toString())), rect);
+                    TexturePaint texturePaint;
+                    texturePaint = new TexturePaint(ImageIO.read(getClass().getResource(m_core.getPluginController().getCurrentBrickProduct().getImagePath())), rect);
                     g2d.setPaint(texturePaint);
                 } catch (IOException ex) {
                     Logger.getLogger(Simulator.class.getName()).log(Level.SEVERE, null, ex);

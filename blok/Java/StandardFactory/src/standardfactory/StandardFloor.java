@@ -15,8 +15,8 @@ import themeFactory.AbstractFloorProduct;
 public class StandardFloor implements AbstractFloorProduct {
 
     @Override
-    public URL getImageURL() {
-        return getClass().getResource("images/ground.png");
+    public String getImagePath() {
+        return "images/ground.png";
     }
     
 }
