@@ -32,21 +32,17 @@ public class UIController implements IUIController {
         m_mainPanel.setSize(size);
         m_mainWindow.setContentPane(m_mainPanel);
               
+        
         m_mainWindow.setResizable(false);
         m_mainWindow.pack();   
         m_mainWindow.setVisible(true);       
     }    
     
-    
-    
     @Override
     public void bodiesCreated(ArrayList<IGameBody> bodies) {
         m_mainPanel.bodiesCreated(bodies);
     }
-    private MainWindow m_mainWindow;
-    private MainPanel m_mainPanel;
-    private ICore m_core;
-
+    
     @Override
     public void bodiesUpdated(ArrayList<IGameBody> bodies) {
         m_mainPanel.bodiesUpdated(bodies);
@@ -61,4 +57,15 @@ public class UIController implements IUIController {
     public void update() {
         m_mainPanel.repaint();
     }
+    
+    @Override
+    public void restart() {
+       m_mainPanel.repaint();
+    }
+    
+    private MainWindow m_mainWindow;
+    private MainPanel m_mainPanel;
+    private ICore m_core;
+
+    
 }

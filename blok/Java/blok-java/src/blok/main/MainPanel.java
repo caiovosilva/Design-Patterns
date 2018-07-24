@@ -143,20 +143,14 @@ public class MainPanel extends javax.swing.JPanel implements MouseListener, KeyL
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D)g;
-        Dimension size = getSize();
-        
-        //            String path = m_core.getPluginController().getCurrentBackgroundProduct().getImagePath();
-//            URL url = getClass().getResource(path);
-//            Image image = ImageIO.read(url);
-g2d.drawImage(m_core.getPluginController().getCurrentBackgroundProduct().getImagePath(), 0, 0, null);
-//            g2d.drawImage(new ImageIcon(getClass().getResource(m_core.getPluginController().getCurrentFloorProduct().getImagePath())).getImage(), size.width/2-450, size.height/2-10+260, null);
-g2d.drawImage(m_core.getPluginController().getCurrentFloorProduct().getImagePath(), size.width/2-450, size.height/2-10+260, null);
-
+        Dimension size = getSize();      
+        g2d.drawImage(m_core.getPluginController().getCurrentTheme().createBackground().getImage(), 0, 0, null);
+        g2d.drawImage(m_core.getPluginController().getCurrentTheme().createFloor().getImage(), size.width/2-450, size.height/2-10+260, null);
         for (Rectangle rect : m_linkedBodies.values()) {
             if (rect != m_player) {
                 // Block
                 TexturePaint texturePaint;
-                texturePaint = new TexturePaint(m_core.getPluginController().getCurrentBrickProduct().getImagePath(), rect);
+                texturePaint = new TexturePaint(m_core.getPluginController().getCurrentTheme().createBrick().getImage(), rect);
                 g2d.setPaint(texturePaint);
             }
             else {

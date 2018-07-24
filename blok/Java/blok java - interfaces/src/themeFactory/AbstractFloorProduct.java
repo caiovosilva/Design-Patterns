@@ -12,5 +12,5 @@ import java.awt.Image;
  * @author caiovosilva
  */
 public interface AbstractFloorProduct {
-    public Image getImagePath();
+    public Image getImage();
 }

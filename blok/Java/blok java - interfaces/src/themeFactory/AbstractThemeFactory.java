@@ -10,7 +10,7 @@ package themeFactory;
  * @author caiovosilva
  */
 public interface AbstractThemeFactory {
-    public AbstractBrickProduct createBrickProduct();
-    public AbstractFloorProduct createFloorProduct();
-    public AbstractBackgroundProduct createBackgroundProduct();
+    public AbstractBrickProduct createBrick();
+    public AbstractFloorProduct createFloor();
+    public AbstractBackgroundProduct createBackground();
 }

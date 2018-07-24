@@ -12,5 +12,5 @@ import java.awt.Image;
  * @author caiovosilva
  */
 public interface AbstractBackgroundProduct {
-    public Image getImagePath();
+    public Image getImage();
 }

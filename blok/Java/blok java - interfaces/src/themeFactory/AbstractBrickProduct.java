@@ -12,5 +12,5 @@ import java.awt.image.BufferedImage;
  * @author caiovosilva
  */
 public interface AbstractBrickProduct {
-    public BufferedImage getImagePath();
+    public BufferedImage getImage();
 }

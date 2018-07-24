@@ -7,7 +7,12 @@ package blok.main;
 import interfaces.ICore;
 import java.awt.Dimension;
 import interfaces.IUIController;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
+import javax.swing.JMenuItem;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
 /**
  *
@@ -22,14 +27,49 @@ public class MainWindow extends javax.swing.JFrame {
         m_core = core;
         initComponents();    
         
-        File currentDir = new File("./plugins");
-        String []plugins = currentDir.list();
+        String[] plugins = m_core.getPluginController().loadedThemes();
         for (int i = 0; i < plugins.length; i++){
                 jThemes.add(plugins[i]);
         }
 
     }
+    
+    public void loadMenuThemes() {
+        jThemes.addMenuListener(new MenuListener() {
 
+            @Override
+            public void menuSelected(MenuEvent e) {
+                String[] plugins = m_core.getPluginController().loadedThemes();
+                for (int i = 0; i < plugins.length; i++) {
+                    jThemes.add(plugins[i]);
+                    final String themeName = plugins[i];
+                    jThemes.add(createMenuItem(plugins[i], new ActionListener() {
+
+                        @Override
+                        public void actionPerformed(ActionEvent ae) {
+                            m_core.getPluginController().loadTheme(themeName);
+                        }
+                    }));
+                }
+            }
+
+            @Override
+            public void menuDeselected(MenuEvent me) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void menuCanceled(MenuEvent me) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+    }
+
+private JMenuItem createMenuItem(String nome, ActionListener actionListener) {
+                JMenuItem item = new JMenuItem(nome);
+                item.addActionListener(actionListener);
+                return item;
+            }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,6 +79,7 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jThemes = new javax.swing.JMenu();
@@ -62,6 +103,7 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

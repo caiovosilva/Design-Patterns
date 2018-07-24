@@ -5,9 +5,7 @@
  */
 package interfaces;
 
-import themeFactory.AbstractBackgroundProduct;
-import themeFactory.AbstractBrickProduct;
-import themeFactory.AbstractFloorProduct;
+import themeFactory.AbstractThemeFactory;
 
 /**
  *
@@ -15,7 +13,6 @@ import themeFactory.AbstractFloorProduct;
  */
 public interface IPluginController {
     public void loadTheme(String factoryName);
-    public AbstractFloorProduct getCurrentFloorProduct();
-    public AbstractBrickProduct getCurrentBrickProduct();
-    public AbstractBackgroundProduct getCurrentBackgroundProduct();
+    public AbstractThemeFactory getCurrentTheme();
+    public String[] loadedThemes();
 }

@@ -17,4 +17,5 @@ public interface IUIController {
     public void bodiesUpdated(ArrayList<IGameBody> bodies);
     public void setPlayerImage(String str);
     public void update();
+    public void restart();
 }
