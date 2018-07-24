@@ -12,17 +12,17 @@ import themeFactory.*;
 public class StandardFactory implements AbstractThemeFactory{
 
     @Override
-    public AbstractBrickProduct createBrickProduct() {
+    public AbstractBrickProduct createBrick() {
         return new StandardBrick();
     }
 
     @Override
-    public AbstractFloorProduct createFloorProduct() {
+    public AbstractFloorProduct createFloor() {
         return new StandardFloor();
     }
 
     @Override
-    public AbstractBackgroundProduct createBackgroundProduct() {
+    public AbstractBackgroundProduct createBackground() {
         return new StandardBackground();
     }
     

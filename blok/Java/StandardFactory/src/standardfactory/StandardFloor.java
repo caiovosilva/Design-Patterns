@@ -6,8 +6,6 @@
 package standardfactory;
 
 import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.net.URL;
 import javax.swing.ImageIcon;
 import themeFactory.AbstractFloorProduct;
 
@@ -18,10 +16,7 @@ import themeFactory.AbstractFloorProduct;
 public class StandardFloor implements AbstractFloorProduct {
 
     @Override
-    public Image getImagePath() {
-        URL url = getClass().getResource("/images/ground.png");
-        Image image = new ImageIcon(url).getImage();
-        return image;
+    public Image getImage() {
+        return new ImageIcon(getClass().getResource("/ground.png")).getImage();
     }
-    
 }

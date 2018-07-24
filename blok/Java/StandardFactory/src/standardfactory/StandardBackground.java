@@ -6,7 +6,12 @@
 package standardfactory;
 
 import java.awt.Image;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import themeFactory.AbstractBackgroundProduct;
 
@@ -17,15 +22,7 @@ import themeFactory.AbstractBackgroundProduct;
 public class StandardBackground implements AbstractBackgroundProduct{
 
     @Override
-    public Image getImagePath() {
-        URL url = this.getClass().getResource("resources/background.png");
-        System.out.println(url.toString());
-        Image image = new ImageIcon(url).getImage();
-        return image;
-    }
-    
-    public static void main(String[] args) {
-        new StandardBackground().getImagePath();
-    }
-    
+    public Image getImage() {
+        return new ImageIcon(getClass().getResource("/background.png")).getImage();
+    }  
 }
