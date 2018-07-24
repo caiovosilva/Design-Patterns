@@ -5,7 +5,9 @@
  */
 package standardfactory;
 
+import java.awt.Image;
 import java.net.URL;
+import javax.swing.ImageIcon;
 import themeFactory.AbstractBackgroundProduct;
 
 /**
@@ -15,8 +17,15 @@ import themeFactory.AbstractBackgroundProduct;
 public class StandardBackground implements AbstractBackgroundProduct{
 
     @Override
-    public String getImagePath() {
-        return ("images/background.png");
+    public Image getImagePath() {
+        URL url = this.getClass().getResource("resources/background.png");
+        System.out.println(url.toString());
+        Image image = new ImageIcon(url).getImage();
+        return image;
+    }
+    
+    public static void main(String[] args) {
+        new StandardBackground().getImagePath();
     }
     
 }

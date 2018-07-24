@@ -5,7 +5,11 @@
  */
 package standardfactory;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.net.URL;
+import javax.swing.ImageIcon;
 import themeFactory.AbstractBrickProduct;
 
 /**
@@ -15,8 +19,15 @@ import themeFactory.AbstractBrickProduct;
 public class StandardBrick implements AbstractBrickProduct {
 
     @Override
-    public String getImagePath() {
-        return "images/tree.png";
+    public BufferedImage getImagePath() {
+        URL url = getClass().getResource("images/tree.png");
+        Image im = new ImageIcon(url).getImage();
+        BufferedImage bi = new BufferedImage
+        (im.getWidth(null),im.getHeight(null),BufferedImage.TYPE_INT_RGB);
+        Graphics bg = bi.getGraphics();
+        bg.drawImage(im, 0, 0, null);
+        bg.dispose();
+        return bi;
     }
     
 }

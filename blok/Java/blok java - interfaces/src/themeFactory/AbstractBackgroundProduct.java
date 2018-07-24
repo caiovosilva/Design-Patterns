@@ -5,10 +5,12 @@
  */
 package themeFactory;
 
+import java.awt.Image;
+
 /**
  *
  * @author caiovosilva
  */
 public interface AbstractBackgroundProduct {
-    public String getImagePath();
+    public Image getImagePath();
 }

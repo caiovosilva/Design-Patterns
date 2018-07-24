@@ -5,10 +5,12 @@
  */
 package themeFactory;
 
+import java.awt.image.BufferedImage;
+
 /**
  *
  * @author caiovosilva
  */
 public interface AbstractBrickProduct {
-    public String getImagePath();
+    public BufferedImage getImagePath();
 }

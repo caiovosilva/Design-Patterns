@@ -5,10 +5,12 @@
  */
 package themeFactory;
 
+import java.awt.Image;
+
 /**
  *
  * @author caiovosilva
  */
 public interface AbstractFloorProduct {
-    public String getImagePath();
+    public Image getImagePath();
 }

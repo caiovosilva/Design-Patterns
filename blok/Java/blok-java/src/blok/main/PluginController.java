@@ -30,12 +30,7 @@ public class PluginController implements IPluginController{
         m_core = core;
         
         File currentDir = new File("./plugins");
-        String []plugins = currentDir.list();
-//        String []pl = currentDir.list(); 
-//        String []plugins = new String[pl.length-1];
-//        for (int i = 1; i < pl.length; i++)
-//            if(!pl[i].equalsIgnoreCase("lib"))
-//                plugins[i]=pl[i];       
+        String []plugins = currentDir.list();     
         URL[] jars = new URL[plugins.length];
         for (int i = 0; i < plugins.length; i++){
             try {

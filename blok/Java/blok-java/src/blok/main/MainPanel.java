@@ -145,27 +145,19 @@ public class MainPanel extends javax.swing.JPanel implements MouseListener, KeyL
         Graphics2D g2d = (Graphics2D)g;
         Dimension size = getSize();
         
-        try {
-            String path = m_core.getPluginController().getCurrentBackgroundProduct().getImagePath();
-            URL url = getClass().getClassLoader().getResource("/plugins/StandardFactory/"+path);
-            Image image = ImageIO.read(url);
-            g2d.drawImage(image, 0, 0, null);
-            g2d.drawImage(new ImageIcon(getClass().getResource(m_core.getPluginController().getCurrentFloorProduct().getImagePath())).getImage(), size.width/2-450, size.height/2-10+260, null);
-
-        } catch (IOException ex) {
-            Logger.getLogger(MainPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //            String path = m_core.getPluginController().getCurrentBackgroundProduct().getImagePath();
+//            URL url = getClass().getResource(path);
+//            Image image = ImageIO.read(url);
+g2d.drawImage(m_core.getPluginController().getCurrentBackgroundProduct().getImagePath(), 0, 0, null);
+//            g2d.drawImage(new ImageIcon(getClass().getResource(m_core.getPluginController().getCurrentFloorProduct().getImagePath())).getImage(), size.width/2-450, size.height/2-10+260, null);
+g2d.drawImage(m_core.getPluginController().getCurrentFloorProduct().getImagePath(), size.width/2-450, size.height/2-10+260, null);
 
         for (Rectangle rect : m_linkedBodies.values()) {
             if (rect != m_player) {
                 // Block
-                try {
-                    TexturePaint texturePaint;
-                    texturePaint = new TexturePaint(ImageIO.read(getClass().getResource(m_core.getPluginController().getCurrentBrickProduct().getImagePath())), rect);
-                    g2d.setPaint(texturePaint);
-                } catch (IOException ex) {
-                    Logger.getLogger(Simulator.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                TexturePaint texturePaint;
+                texturePaint = new TexturePaint(m_core.getPluginController().getCurrentBrickProduct().getImagePath(), rect);
+                g2d.setPaint(texturePaint);
             }
             else {
                 // Player
