@@ -51,21 +51,18 @@ public class PluginController implements IPluginController{
         try {
             try {
                 factory = (AbstractThemeFactory) Class.forName(factoryName.toLowerCase() + "." + factoryName, true, m_ulc).newInstance();
-            } catch (InstantiationException ex) {
-                Logger.getLogger(PluginController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
+            } catch (InstantiationException | IllegalAccessException ex) {
                 Logger.getLogger(PluginController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(PluginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        createProducts(factory);
+        m_currentTheme = factory;
+        if(m_core.getUIController() != null)
+            m_core.getUIController().restart();
+                
     }
     
-    private void createProducts(AbstractThemeFactory factory) {
-        m_currentTheme = factory;
-    }
-
     public AbstractThemeFactory getCurrentTheme() {
         return m_currentTheme;
     }

@@ -134,3 +134,6 @@ CMakeLists.txt.user*
 /blok/Java/StandardFactory/build/
 /blok/Java/blok-java/dist/
 /blok/Java/blok-java/plugins/
+/blok/Java/IceFactory/nbproject/private/
+/blok/Java/IceFactory/build/
+/blok/Java/IceFactory/dist/

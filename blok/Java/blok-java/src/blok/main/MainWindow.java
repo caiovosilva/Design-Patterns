@@ -27,11 +27,11 @@ public class MainWindow extends javax.swing.JFrame {
         m_core = core;
         initComponents();    
         
-        String[] plugins = m_core.getPluginController().loadedThemes();
-        for (int i = 0; i < plugins.length; i++){
-                jThemes.add(plugins[i]);
-        }
-
+//        String[] plugins = m_core.getPluginController().loadedThemes();
+//        for (int i = 0; i < plugins.length; i++){
+//                jThemes.add(plugins[i]);
+//        }
+        loadMenuThemes();
     }
     
     public void loadMenuThemes() {
@@ -41,7 +41,7 @@ public class MainWindow extends javax.swing.JFrame {
             public void menuSelected(MenuEvent e) {
                 String[] plugins = m_core.getPluginController().loadedThemes();
                 for (int i = 0; i < plugins.length; i++) {
-                    jThemes.add(plugins[i]);
+                   // jThemes.add(plugins[i]);
                     final String themeName = plugins[i];
                     jThemes.add(createMenuItem(plugins[i], new ActionListener() {
 
@@ -55,12 +55,11 @@ public class MainWindow extends javax.swing.JFrame {
 
             @Override
             public void menuDeselected(MenuEvent me) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                jThemes.removeAll();          
             }
 
             @Override
             public void menuCanceled(MenuEvent me) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
     }
