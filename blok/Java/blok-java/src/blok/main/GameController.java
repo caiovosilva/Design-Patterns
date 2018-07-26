@@ -42,7 +42,7 @@ public class GameController implements IGameController{
                 m_core.getSimulator().start();
                 break;
         }
-        m_core.getUIController().update();
+        m_core.getUIController().restart();
     }
 
     @Override

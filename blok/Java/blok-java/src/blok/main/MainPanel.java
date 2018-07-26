@@ -159,7 +159,7 @@ public class MainPanel extends javax.swing.JPanel implements MouseListener, KeyL
                     TexturePaint texturePaint = new TexturePaint(ImageIO.read(new File(m_playerImage)), rect);
                     g2d.setPaint(texturePaint);
                 } catch (IOException ex) {
-                    Logger.getLogger(Simulator.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ISimulator.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             g2d.fill(rect);

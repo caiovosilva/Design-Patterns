@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
@@ -25,13 +26,15 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow(ICore core) {
         m_core = core;
-        initComponents();    
-        
-//        String[] plugins = m_core.getPluginController().loadedThemes();
-//        for (int i = 0; i < plugins.length; i++){
-//                jThemes.add(plugins[i]);
-//        }
+        initComponents(); 
         loadMenuThemes();
+        
+        String themeName = (String) JOptionPane.showInputDialog(null, "Escolha um tema!", "Blok no javinha",
+        JOptionPane.QUESTION_MESSAGE, null, m_core.getPluginController().loadedThemes(),"StandardFactory");
+        if(themeName==null){
+            System.exit(0);
+        }
+        m_core.getPluginController().loadTheme(themeName);       
     }
     
     public void loadMenuThemes() {
@@ -48,6 +51,7 @@ public class MainWindow extends javax.swing.JFrame {
                         @Override
                         public void actionPerformed(ActionEvent ae) {
                             m_core.getPluginController().loadTheme(themeName);
+                            m_core.getUIController().restart();
                         }
                     }));
                 }

@@ -37,8 +37,6 @@ public class PluginController implements IPluginController{
             }
         }
         m_ulc = new URLClassLoader(jars);
-        if(m_loadedThemes.length>0)
-            loadTheme(m_loadedThemes[0]);
     }
     
     public String[] loadedThemes(){
@@ -57,12 +55,10 @@ public class PluginController implements IPluginController{
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(PluginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        m_currentTheme = factory;
-        if(m_core.getUIController() != null)
-            m_core.getUIController().restart();
-                
+        m_currentTheme = factory;              
     }
     
+    @Override
     public AbstractThemeFactory getCurrentTheme() {
         return m_currentTheme;
     }

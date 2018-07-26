@@ -54,13 +54,8 @@ public class UIController implements IUIController {
     }
 
     @Override
-    public void update() {
-        m_mainPanel.repaint();
-    }
-    
-    @Override
     public void restart() {
-       m_mainPanel.repaint();
+       //repaint o mainPanel, mas nao mudou nada na tela
     }
     
     private MainWindow m_mainWindow;

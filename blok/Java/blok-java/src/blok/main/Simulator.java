@@ -11,6 +11,7 @@ import interfaces.IGameController;
 import interfaces.ISimulator;
 import interfaces.IUIController;
 import blok.utilities.GameBody;
+import blok.utilities.GameBody;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
