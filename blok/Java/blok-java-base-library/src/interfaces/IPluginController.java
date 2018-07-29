@@ -5,6 +5,7 @@
  */
 package interfaces;
 
+import java.util.ArrayList;
 import themeFactory.AbstractThemeFactory;
 
 /**
@@ -14,5 +15,6 @@ import themeFactory.AbstractThemeFactory;
 public interface IPluginController {
     public void loadTheme(String factoryName);
     public AbstractThemeFactory getCurrentTheme();
-    public String[] loadedThemes();
+    //public String[] loadedThemes();
+    public ArrayList<String> getloadedPluginsNamesByType(Class pClass);
 }

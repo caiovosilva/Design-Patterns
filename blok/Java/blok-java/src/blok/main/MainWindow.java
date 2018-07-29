@@ -14,6 +14,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
+import themeFactory.AbstractThemeFactory;
 
 /**
  *
@@ -27,52 +28,54 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow(ICore core) {
         m_core = core;
         initComponents(); 
-        loadMenuThemes();
+        //loadMenuThemes();
         
+//        String themeName = (String) JOptionPane.showInputDialog(null, "Escolha um tema!", "Blok no javinha",
+    //        JOptionPane.QUESTION_MESSAGE, null, m_core.getPluginController().loadedThemes(),"StandardFactory");
         String themeName = (String) JOptionPane.showInputDialog(null, "Escolha um tema!", "Blok no javinha",
-        JOptionPane.QUESTION_MESSAGE, null, m_core.getPluginController().loadedThemes(),"StandardFactory");
+            JOptionPane.QUESTION_MESSAGE, null, m_core.getPluginController().getloadedPluginsNamesByType(AbstractThemeFactory.class).toArray(),"StandardFactory");
         if(themeName==null){
             System.exit(0);
         }
         m_core.getPluginController().loadTheme(themeName);       
     }
     
-    public void loadMenuThemes() {
-        jThemes.addMenuListener(new MenuListener() {
+//    public void loadMenuThemes() {
+//        jThemes.addMenuListener(new MenuListener() {
+//
+//            @Override
+//            public void menuSelected(MenuEvent e) {
+//                String[] plugins = m_core.getPluginController().loadedThemes();
+//                for (int i = 0; i < plugins.length; i++) {
+//                   // jThemes.add(plugins[i]);
+//                    final String themeName = plugins[i];
+//                    jThemes.add(createMenuItem(plugins[i], new ActionListener() {
+//
+//                        @Override
+//                        public void actionPerformed(ActionEvent ae) {
+//                            m_core.getPluginController().loadTheme(themeName);
+//                            m_core.getUIController().restart();
+//                        }
+//                    }));
+//                }
+//            }
+//
+//            @Override
+//            public void menuDeselected(MenuEvent me) {
+//                jThemes.removeAll();          
+//            }
+//
+//            @Override
+//            public void menuCanceled(MenuEvent me) {
+//            }
+//        });
+//    }
 
-            @Override
-            public void menuSelected(MenuEvent e) {
-                String[] plugins = m_core.getPluginController().loadedThemes();
-                for (int i = 0; i < plugins.length; i++) {
-                   // jThemes.add(plugins[i]);
-                    final String themeName = plugins[i];
-                    jThemes.add(createMenuItem(plugins[i], new ActionListener() {
-
-                        @Override
-                        public void actionPerformed(ActionEvent ae) {
-                            m_core.getPluginController().loadTheme(themeName);
-                            m_core.getUIController().restart();
-                        }
-                    }));
-                }
-            }
-
-            @Override
-            public void menuDeselected(MenuEvent me) {
-                jThemes.removeAll();          
-            }
-
-            @Override
-            public void menuCanceled(MenuEvent me) {
-            }
-        });
-    }
-
-private JMenuItem createMenuItem(String nome, ActionListener actionListener) {
-                JMenuItem item = new JMenuItem(nome);
-                item.addActionListener(actionListener);
-                return item;
-            }
+//    private JMenuItem createMenuItem(String nome, ActionListener actionListener) {
+//                JMenuItem item = new JMenuItem(nome);
+//                item.addActionListener(actionListener);
+//                return item;
+//            }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

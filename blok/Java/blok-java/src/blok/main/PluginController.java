@@ -5,6 +5,7 @@
  */
 package blok.main;
 
+import concreteclasses.Plugin;
 import interfaces.ICore;
 import interfaces.IPluginController;
 import java.io.File;
@@ -12,6 +13,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import themeFactory.AbstractThemeFactory;
@@ -22,26 +24,37 @@ import themeFactory.AbstractThemeFactory;
  */
 public class PluginController implements IPluginController{
     
-    public PluginController(ICore core) {
-        m_core = core;    
+    public PluginController() {
         File currentDir = new File("./plugins");
-        m_loadedThemes = currentDir.list();     
-        URL[] jars = new URL[m_loadedThemes.length];
-        for (int i = 0; i < m_loadedThemes.length; i++){
+        String[] lPluginsNames = currentDir.list();     
+        URL[] jars = new URL[lPluginsNames.length];
+        for (int i = 0; i < lPluginsNames.length; i++){
             try {
-                URI uri = (new File("./plugins/" + m_loadedThemes[i])).toURI();
+                URI uri = (new File("./plugins/" + lPluginsNames[i])).toURI();
                 jars[i] = uri.toURL();
-                m_loadedThemes[i] = m_loadedThemes[i].split("\\.")[0];
+                String lName = lPluginsNames[i].split("\\.")[0];
+                        m_ulc = new URLClassLoader(jars);
+
+                Plugin plugin = ((Plugin)Class.forName(lName.toLowerCase() + "." + lName, true, m_ulc).newInstance());
+                m_loadedPlugins.add(plugin); 
             }
             catch (MalformedURLException e) {
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(PluginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            catch (InstantiationException ex) {
+                Logger.getLogger(PluginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            catch (IllegalAccessException ex) {
+                Logger.getLogger(PluginController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         m_ulc = new URLClassLoader(jars);
     }
     
-    public String[] loadedThemes(){
-        return m_loadedThemes;
-    }
+//    public String[] loadedThemes(){
+//        return m_loadedThemes;
+//    }
     
     @Override       
     public void loadTheme(String factoryName) {
@@ -63,8 +76,17 @@ public class PluginController implements IPluginController{
         return m_currentTheme;
     }
     
-    private ICore m_core;
+    @Override
+     public ArrayList<String> getloadedPluginsNamesByType(Class pClass){
+        ArrayList<String> lPlugins = new ArrayList<String>();
+        for(Plugin plugin : m_loadedPlugins)
+            if(pClass.isInstance(plugin))
+                lPlugins.add(plugin.getClass().getName().split("\\.")[1]);
+        return lPlugins;
+    }
+    
     private URLClassLoader m_ulc;
     private AbstractThemeFactory m_currentTheme; 
-    private String[] m_loadedThemes;
+    private ArrayList<Plugin> m_loadedPlugins = new ArrayList<Plugin>();
+
 }

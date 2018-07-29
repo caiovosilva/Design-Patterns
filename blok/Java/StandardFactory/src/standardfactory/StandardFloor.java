@@ -17,6 +17,6 @@ public class StandardFloor implements AbstractFloorProduct {
 
     @Override
     public Image getImage() {
-        return new ImageIcon(getClass().getResource("/ground.png")).getImage();
+        return new ImageIcon(getClass().getResource("/standardImages/ground.png")).getImage();
     }
 }

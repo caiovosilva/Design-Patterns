@@ -8,7 +8,6 @@ package standardfactory;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.net.URL;
 import javax.swing.ImageIcon;
 import themeFactory.AbstractBrickProduct;
 
@@ -20,7 +19,7 @@ public class StandardBrick implements AbstractBrickProduct {
 
     @Override
     public BufferedImage getImage() {
-        Image im = new ImageIcon(getClass().getResource("/brick.png")).getImage();
+        Image im = new ImageIcon(getClass().getResource("/standardImages/brick.png")).getImage();
         BufferedImage bi = new BufferedImage
         (im.getWidth(null),im.getHeight(null),BufferedImage.TYPE_INT_RGB);
         Graphics bg = bi.getGraphics();

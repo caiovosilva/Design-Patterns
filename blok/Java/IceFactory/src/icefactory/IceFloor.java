@@ -17,6 +17,6 @@ public class IceFloor implements AbstractFloorProduct {
 
     @Override
     public Image getImage() {
-        return new ImageIcon(getClass().getResource("/ground.png")).getImage();
+        return new ImageIcon(getClass().getResource("/iceImages/ground.png")).getImage();
     }
 }

@@ -8,7 +8,6 @@ import interfaces.ICore;
 import interfaces.IGameBody;
 import interfaces.IGameController;
 import interfaces.ISimulator;
-import interfaces.IUIController;
 import blok.utilities.GameBody;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -17,17 +16,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.sound.sampled.*;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -103,14 +97,14 @@ public class MainPanel extends javax.swing.JPanel implements MouseListener, KeyL
     
     public void bodiesUpdated(ArrayList<IGameBody> bodies) {
         Dimension size = getSize();
-        for (IGameBody body : bodies) {
+        bodies.forEach((body) -> {
             if (body.getType() == GameBody.Type.PLAYER)
                 // Player
                 m_linkedBodies.get(body).setLocation(size.width/2-28 + (int) body.getRectangle().x, size.height/2-28 - (int) body.getRectangle().y);
             else
                 // Block
                 m_linkedBodies.get(body).setLocation(size.width/2-14 + (int) body.getRectangle().x, size.height/2-14 - (int) body.getRectangle().y);
-        }
+        });
         repaint();
     }
 
@@ -118,7 +112,7 @@ public class MainPanel extends javax.swing.JPanel implements MouseListener, KeyL
         //m_bodyRect.clear();
         m_linkedBodies.clear();
         Dimension size = getSize();
-        for (IGameBody body : bodies) {
+        bodies.forEach((body) -> {
             Rectangle rectangle = new Rectangle();
             if (body.getType() == GameBody.Type.PLAYER)
             {
@@ -135,7 +129,7 @@ public class MainPanel extends javax.swing.JPanel implements MouseListener, KeyL
             }
             //m_bodyRect.put(body, rectangle);
             m_linkedBodies.put(body, rectangle);
-        }
+        });
         repaint();
     }
     

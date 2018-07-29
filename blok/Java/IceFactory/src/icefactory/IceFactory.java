@@ -9,12 +9,13 @@ package icefactory;
  *
  * @author caiov
  */
+import concreteclasses.Plugin;
 import themeFactory.*;
 /**
  *
  * @author caiovosilva
  */
-public class IceFactory implements AbstractThemeFactory{
+public class IceFactory extends Plugin implements AbstractThemeFactory{
 
     @Override
     public AbstractBrickProduct createBrick() {

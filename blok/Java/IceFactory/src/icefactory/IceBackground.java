@@ -17,6 +17,6 @@ public class IceBackground implements AbstractBackgroundProduct{
    
     @Override
     public Image getImage() {
-        return new ImageIcon(getClass().getResource("/background.png")).getImage();
+        return new ImageIcon(getClass().getResource("/iceImages/background.png")).getImage();
     }  
 }

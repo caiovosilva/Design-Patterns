@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 package standardfactory;
+
+import concreteclasses.Plugin;
 import themeFactory.*;
 /**
  *
  * @author caiovosilva
  */
-public class StandardFactory implements AbstractThemeFactory{
+public class StandardFactory extends Plugin implements AbstractThemeFactory{
 
     @Override
     public AbstractBrickProduct createBrick() {
