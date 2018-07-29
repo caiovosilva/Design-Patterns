@@ -1,17 +1,21 @@
 /*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package box2dsimulator;
+
+
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package blok.main;
-
-import blok.main.MainPanel;
+import concreteclasses.Plugin;
 import interfaces.ICore;
 import interfaces.IGameBody;
 import interfaces.IGameController;
 import interfaces.ISimulator;
-import interfaces.IUIController;
-import blok.utilities.GameBody;
-import blok.utilities.GameBody;
+import concreteclasses.GameBody;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
@@ -26,15 +30,16 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.*;
 import org.jbox2d.dynamics.contacts.Contact;
 
-/**
- *
- * @author sandroandrade
- */
-public class Simulator implements Runnable, ContactListener, ISimulator {
+
+public class Box2dSimulator extends Plugin implements Runnable, ContactListener, ISimulator {
     
-    public Simulator(ICore core){
+    public Box2dSimulator(ICore core){
         m_core = core;
     }
+    
+    public Box2dSimulator(){    
+    }
+    
     @Override
     public void start() {
         m_schedulerHandle = m_scheduler.scheduleAtFixedRate(this, 0, 3, TimeUnit.MILLISECONDS);

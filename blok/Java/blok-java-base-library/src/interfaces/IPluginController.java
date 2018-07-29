@@ -5,6 +5,7 @@
  */
 package interfaces;
 
+import concreteclasses.Plugin;
 import java.util.ArrayList;
 import themeFactory.AbstractThemeFactory;
 
@@ -14,7 +15,8 @@ import themeFactory.AbstractThemeFactory;
  */
 public interface IPluginController {
     public void loadTheme(String factoryName);
+    public void loadSimulator(String simulatorName);
     public AbstractThemeFactory getCurrentTheme();
-    //public String[] loadedThemes();
+    public ISimulator getLoadedSimulator();
     public ArrayList<String> getloadedPluginsNamesByType(Class pClass);
 }

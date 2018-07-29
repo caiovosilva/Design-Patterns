@@ -6,8 +6,8 @@
 package blok.main;
 
 import concreteclasses.Plugin;
-import interfaces.ICore;
 import interfaces.IPluginController;
+import interfaces.ISimulator;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -32,40 +32,42 @@ public class PluginController implements IPluginController{
             try {
                 URI uri = (new File("./plugins/" + lPluginsNames[i])).toURI();
                 jars[i] = uri.toURL();
+                m_ulc = new URLClassLoader(jars);
                 String lName = lPluginsNames[i].split("\\.")[0];
-                        m_ulc = new URLClassLoader(jars);
-
-                Plugin plugin = ((Plugin)Class.forName(lName.toLowerCase() + "." + lName, true, m_ulc).newInstance());
+                Plugin plugin = ((Plugin) Class.forName(lName.toLowerCase() + "." + lName, true, m_ulc).newInstance());
                 m_loadedPlugins.add(plugin); 
             }
-            catch (MalformedURLException e) {
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(PluginController.class.getName()).log(Level.SEVERE, null, ex);
+            catch(NullPointerException e){
+                System.out.println(e.fillInStackTrace());
             }
-            catch (InstantiationException ex) {
-                Logger.getLogger(PluginController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            catch (IllegalAccessException ex) {
+            catch (MalformedURLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
                 Logger.getLogger(PluginController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        m_ulc = new URLClassLoader(jars);
     }
     
-//    public String[] loadedThemes(){
-//        return m_loadedThemes;
-//    }
+    @Override   
+    public ISimulator getLoadedSimulator(){
+        return m_currentSimulator;
+    }
     
     @Override       
-    public void loadTheme(String factoryName) {
+    public void loadSimulator(String pluguinName) {
+        ISimulator simulator = null;
+        try {
+            simulator = (ISimulator) Class.forName(pluguinName.toLowerCase() + "." + pluguinName, true, m_ulc).newInstance();
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
+            Logger.getLogger(PluginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        m_currentSimulator = simulator;              
+    }
+    
+    @Override       
+    public void loadTheme(String pluguinName) {
         AbstractThemeFactory factory = null;
         try {
-            try {
-                factory = (AbstractThemeFactory) Class.forName(factoryName.toLowerCase() + "." + factoryName, true, m_ulc).newInstance();
-            } catch (InstantiationException | IllegalAccessException ex) {
-                Logger.getLogger(PluginController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch (ClassNotFoundException ex) {
+            factory = (AbstractThemeFactory) Class.forName(pluguinName.toLowerCase() + "." + pluguinName, true, m_ulc).newInstance();
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
             Logger.getLogger(PluginController.class.getName()).log(Level.SEVERE, null, ex);
         }
         m_currentTheme = factory;              
@@ -87,6 +89,7 @@ public class PluginController implements IPluginController{
     
     private URLClassLoader m_ulc;
     private AbstractThemeFactory m_currentTheme; 
+    private ISimulator m_currentSimulator;
     private ArrayList<Plugin> m_loadedPlugins = new ArrayList<Plugin>();
 
 }

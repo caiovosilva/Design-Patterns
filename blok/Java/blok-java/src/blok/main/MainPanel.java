@@ -8,7 +8,7 @@ import interfaces.ICore;
 import interfaces.IGameBody;
 import interfaces.IGameController;
 import interfaces.ISimulator;
-import blok.utilities.GameBody;
+import concreteclasses.GameBody;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

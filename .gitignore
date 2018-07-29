@@ -142,3 +142,6 @@ CMakeLists.txt.user*
 /blok/Java/blok-java/build/
 /blok/Java/blok-java-base-library/build/
 /blok/Java/blok-java-base-library/dist/
+/blok/Java/Box2dSimulator/nbproject/private/
+/blok/Java/Box2dSimulator/build/
+/blok/Java/Box2dSimulator/dist/

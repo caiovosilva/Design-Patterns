@@ -5,15 +5,8 @@
 package blok.main;
 
 import interfaces.ICore;
-import java.awt.Dimension;
-import interfaces.IUIController;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import javax.swing.JMenuItem;
+import interfaces.ISimulator;
 import javax.swing.JOptionPane;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 import themeFactory.AbstractThemeFactory;
 
 /**
@@ -28,54 +21,21 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow(ICore core) {
         m_core = core;
         initComponents(); 
-        //loadMenuThemes();
         
-//        String themeName = (String) JOptionPane.showInputDialog(null, "Escolha um tema!", "Blok no javinha",
-    //        JOptionPane.QUESTION_MESSAGE, null, m_core.getPluginController().loadedThemes(),"StandardFactory");
         String themeName = (String) JOptionPane.showInputDialog(null, "Escolha um tema!", "Blok no javinha",
             JOptionPane.QUESTION_MESSAGE, null, m_core.getPluginController().getloadedPluginsNamesByType(AbstractThemeFactory.class).toArray(),"StandardFactory");
         if(themeName==null){
             System.exit(0);
         }
+        String simulatorName = (String) JOptionPane.showInputDialog(null, "Escolha um simulador de fisica!", "Blok no javinha",
+            JOptionPane.QUESTION_MESSAGE, null, m_core.getPluginController().getloadedPluginsNamesByType(ISimulator.class).toArray(),"StandardFactory");
+        if(simulatorName==null){
+            System.exit(0);
+        }
+        m_core.getPluginController().loadTheme(simulatorName);
         m_core.getPluginController().loadTheme(themeName);       
     }
     
-//    public void loadMenuThemes() {
-//        jThemes.addMenuListener(new MenuListener() {
-//
-//            @Override
-//            public void menuSelected(MenuEvent e) {
-//                String[] plugins = m_core.getPluginController().loadedThemes();
-//                for (int i = 0; i < plugins.length; i++) {
-//                   // jThemes.add(plugins[i]);
-//                    final String themeName = plugins[i];
-//                    jThemes.add(createMenuItem(plugins[i], new ActionListener() {
-//
-//                        @Override
-//                        public void actionPerformed(ActionEvent ae) {
-//                            m_core.getPluginController().loadTheme(themeName);
-//                            m_core.getUIController().restart();
-//                        }
-//                    }));
-//                }
-//            }
-//
-//            @Override
-//            public void menuDeselected(MenuEvent me) {
-//                jThemes.removeAll();          
-//            }
-//
-//            @Override
-//            public void menuCanceled(MenuEvent me) {
-//            }
-//        });
-//    }
-
-//    private JMenuItem createMenuItem(String nome, ActionListener actionListener) {
-//                JMenuItem item = new JMenuItem(nome);
-//                item.addActionListener(actionListener);
-//                return item;
-//            }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -88,7 +48,6 @@ public class MainWindow extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jThemes = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -96,9 +55,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
-
-        jThemes.setText("Themes");
-        jMenuBar1.add(jThemes);
 
         jMenu2.setText("Help");
         jMenuBar1.add(jMenu2);
@@ -113,7 +69,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu jThemes;
     // End of variables declaration//GEN-END:variables
     private ICore m_core;
 }

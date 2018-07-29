@@ -5,14 +5,11 @@
  */
 package blok.main;
 
-import blok.utilities.GameBody;
 import interfaces.ICore;
 import interfaces.IGameBody;
 import interfaces.IUIController;
 import java.awt.Dimension;
-import java.awt.Rectangle;
 import java.util.ArrayList;
-import org.jbox2d.common.Vec2;
 
 /**
  *
@@ -30,9 +27,8 @@ public class UIController implements IUIController {
         m_mainPanel.setMinimumSize(size);
         m_mainPanel.setMaximumSize(size);
         m_mainPanel.setSize(size);
-        m_mainWindow.setContentPane(m_mainPanel);
-              
         
+        m_mainWindow.setContentPane(m_mainPanel);                   
         m_mainWindow.setResizable(false);
         m_mainWindow.pack();   
         m_mainWindow.setVisible(true);       
