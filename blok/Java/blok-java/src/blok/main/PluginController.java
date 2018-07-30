@@ -27,18 +27,21 @@ public class PluginController implements IPluginController{
     
     public PluginController() {
         File currentDir = new File("./plugins");
-        String[] lPluginsNames = currentDir.list();     
-        URL[] jars = new URL[lPluginsNames.length];
-        for (int i = 0; i < lPluginsNames.length; i++){
+        ArrayList<String> lPluginsNames = new ArrayList<>();
+        for(File file : currentDir.listFiles()){
+            if(!file.isDirectory())
+                lPluginsNames.add(file.getName());
+        }
+        URL[] jars = new URL[lPluginsNames.size()];
+        for (int i = 0; i < lPluginsNames.size(); i++){
             try {
-                URI uri = (new File("./plugins/" + lPluginsNames[i])).toURI();
+                URI uri = (new File("./plugins/" + lPluginsNames.get(i))).toURI();
                 jars[i] = uri.toURL();
                 m_ulc = new URLClassLoader(jars);
-                String lName = lPluginsNames[i].split("\\.")[0];
-                if(Plugin.class.isInstance(Class.forName(lName.toLowerCase() + "." + lName, true, m_ulc).newInstance()))
-                    m_loadedPlugins.add((Plugin) Class.forName(lName.toLowerCase() + "." + lName, true, m_ulc).newInstance()); 
+                String lName = lPluginsNames.get(i).split("\\.")[0];
+                m_loadedPlugins.add((Plugin) Class.forName(lName.toLowerCase() + "." + lName, true, m_ulc).newInstance()); 
             }
-            catch (MalformedURLException | ClassNotFoundException | InstantiationException | IllegalAccessException | NullPointerException ex) {
+            catch (MalformedURLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
                 Logger.getLogger(PluginController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
