@@ -5,14 +5,12 @@
  */
 package interfaces;
 
+import java.awt.Image;
+
 /**
  *
  * @author caiovosilva
  */
-public interface ISimulator {
-    public void init();
-    public void stop();
-    public void start();
-    public void removeBody(int bodyIndex);
-    public void setCore(ICore core);
+public interface AbstractBackgroundProduct {
+    public Image getImage();
 }

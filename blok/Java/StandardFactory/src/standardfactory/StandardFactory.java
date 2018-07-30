@@ -5,8 +5,11 @@
  */
 package standardfactory;
 
+import interfaces.AbstractBrickProduct;
+import interfaces.AbstractBackgroundProduct;
+import interfaces.AbstractThemeFactory;
+import interfaces.AbstractFloorProduct;
 import concreteclasses.Plugin;
-import themeFactory.*;
 /**
  *
  * @author caiovosilva

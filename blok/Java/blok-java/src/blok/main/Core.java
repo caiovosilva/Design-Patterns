@@ -17,9 +17,10 @@ public class Core implements ICore{
 
     public Core(){
         m_gameController = new GameController(this);
-        m_pluginController = new PluginController();
-        m_simulatorController = m_pluginController.getLoadedSimulator();
+        m_pluginController = new PluginController();    
         m_uiController = new UIController(this);      
+        m_simulatorController = m_pluginController.getLoadedSimulatorFactory().createSimulator();
+        m_simulatorController.setCore(this); //sera retirado quando implementado o singleton
         m_simulatorController.init();
     }
     @Override

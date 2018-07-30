@@ -16,7 +16,8 @@ import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import themeFactory.AbstractThemeFactory;
+import interfaces.AbstractThemeFactory;
+import interfaces.ISimulatorFactoryMethod;
 
 /**
  *
@@ -34,11 +35,7 @@ public class PluginController implements IPluginController{
                 jars[i] = uri.toURL();
                 m_ulc = new URLClassLoader(jars);
                 String lName = lPluginsNames[i].split("\\.")[0];
-                Plugin plugin = ((Plugin) Class.forName(lName.toLowerCase() + "." + lName, true, m_ulc).newInstance());
-                m_loadedPlugins.add(plugin); 
-            }
-            catch(NullPointerException e){
-                System.out.println(e.fillInStackTrace());
+                m_loadedPlugins.add((Plugin) Class.forName(lName.toLowerCase() + "." + lName, true, m_ulc).newInstance()); 
             }
             catch (MalformedURLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
                 Logger.getLogger(PluginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -47,19 +44,19 @@ public class PluginController implements IPluginController{
     }
     
     @Override   
-    public ISimulator getLoadedSimulator(){
-        return m_currentSimulator;
+    public ISimulatorFactoryMethod getLoadedSimulatorFactory(){
+        return m_currentFactorySimulator;
     }
     
     @Override       
-    public void loadSimulator(String pluguinName) {
-        ISimulator simulator = null;
+    public void loadSimulatorFactory(String pluguinName) {
+        ISimulatorFactoryMethod simulator = null;
         try {
-            simulator = (ISimulator) Class.forName(pluguinName.toLowerCase() + "." + pluguinName, true, m_ulc).newInstance();
+            simulator = (ISimulatorFactoryMethod) Class.forName(pluguinName.toLowerCase() + "." + pluguinName, true, m_ulc).newInstance();
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
             Logger.getLogger(PluginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        m_currentSimulator = simulator;              
+        m_currentFactorySimulator = simulator;              
     }
     
     @Override       
@@ -89,7 +86,7 @@ public class PluginController implements IPluginController{
     
     private URLClassLoader m_ulc;
     private AbstractThemeFactory m_currentTheme; 
-    private ISimulator m_currentSimulator;
+    private ISimulatorFactoryMethod m_currentFactorySimulator;
     private ArrayList<Plugin> m_loadedPlugins = new ArrayList<Plugin>();
 
 }

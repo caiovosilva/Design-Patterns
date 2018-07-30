@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package themeFactory;
-
-import java.awt.Image;
+package interfaces;
 
 /**
  *
  * @author caiovosilva
  */
-public interface AbstractFloorProduct {
-    public Image getImage();
+public interface AbstractThemeFactory {
+    public AbstractBrickProduct createBrick();
+    public AbstractFloorProduct createFloor();
+    public AbstractBackgroundProduct createBackground();
 }

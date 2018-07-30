@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package themeFactory;
-
-import java.awt.image.BufferedImage;
+package interfaces;
 
 /**
  *
  * @author caiovosilva
  */
-public interface AbstractBrickProduct {
-    public BufferedImage getImage();
+public interface ISimulatorFactoryMethod {
+    ISimulator createSimulator();
 }

@@ -7,7 +7,7 @@ package icefactory;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
-import themeFactory.AbstractBackgroundProduct;
+import interfaces.AbstractBackgroundProduct;
 
 /**
  *

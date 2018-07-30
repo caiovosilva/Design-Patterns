@@ -9,8 +9,11 @@ package icefactory;
  *
  * @author caiov
  */
+import interfaces.AbstractFloorProduct;
+import interfaces.AbstractBrickProduct;
+import interfaces.AbstractThemeFactory;
+import interfaces.AbstractBackgroundProduct;
 import concreteclasses.Plugin;
-import themeFactory.*;
 /**
  *
  * @author caiovosilva

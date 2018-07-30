@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package box2dsimulator;
-
-
+package box2dsimulatorfactory;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -31,13 +29,11 @@ import org.jbox2d.dynamics.*;
 import org.jbox2d.dynamics.contacts.Contact;
 
 
-public class Box2dSimulator extends Plugin implements Runnable, ContactListener, ISimulator {
+public class Box2dSimulator implements Runnable, ContactListener, ISimulator {
     
-    public Box2dSimulator(ICore core){
+    @Override
+    public void setCore(ICore core){
         m_core = core;
-    }
-    
-    public Box2dSimulator(){    
     }
     
     @Override

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package themeFactory;
+package interfaces;
 
 import java.awt.Image;
 
@@ -11,6 +11,6 @@ import java.awt.Image;
  *
  * @author caiovosilva
  */
-public interface AbstractBackgroundProduct {
+public interface AbstractFloorProduct {
     public Image getImage();
 }

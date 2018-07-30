@@ -7,7 +7,8 @@ package blok.main;
 import interfaces.ICore;
 import interfaces.ISimulator;
 import javax.swing.JOptionPane;
-import themeFactory.AbstractThemeFactory;
+import interfaces.AbstractThemeFactory;
+import interfaces.ISimulatorFactoryMethod;
 
 /**
  *
@@ -28,11 +29,11 @@ public class MainWindow extends javax.swing.JFrame {
             System.exit(0);
         }
         String simulatorName = (String) JOptionPane.showInputDialog(null, "Escolha um simulador de fisica!", "Blok no javinha",
-            JOptionPane.QUESTION_MESSAGE, null, m_core.getPluginController().getloadedPluginsNamesByType(ISimulator.class).toArray(),"StandardFactory");
+            JOptionPane.QUESTION_MESSAGE, null, m_core.getPluginController().getloadedPluginsNamesByType(ISimulatorFactoryMethod.class).toArray(),"");
         if(simulatorName==null){
             System.exit(0);
         }
-        m_core.getPluginController().loadTheme(simulatorName);
+        m_core.getPluginController().loadSimulatorFactory(simulatorName);
         m_core.getPluginController().loadTheme(themeName);       
     }
     
