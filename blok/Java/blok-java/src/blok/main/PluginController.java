@@ -35,9 +35,10 @@ public class PluginController implements IPluginController{
                 jars[i] = uri.toURL();
                 m_ulc = new URLClassLoader(jars);
                 String lName = lPluginsNames[i].split("\\.")[0];
-                m_loadedPlugins.add((Plugin) Class.forName(lName.toLowerCase() + "." + lName, true, m_ulc).newInstance()); 
+                if(Plugin.class.isInstance(Class.forName(lName.toLowerCase() + "." + lName, true, m_ulc).newInstance()))
+                    m_loadedPlugins.add((Plugin) Class.forName(lName.toLowerCase() + "." + lName, true, m_ulc).newInstance()); 
             }
-            catch (MalformedURLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            catch (MalformedURLException | ClassNotFoundException | InstantiationException | IllegalAccessException | NullPointerException ex) {
                 Logger.getLogger(PluginController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
