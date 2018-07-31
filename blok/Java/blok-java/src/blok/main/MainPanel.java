@@ -54,8 +54,11 @@ public class MainPanel extends javax.swing.JPanel implements MouseListener, KeyL
                 break;
             }
         }
-        if (toBeRemoved != null)
+        if (toBeRemoved != null){
             m_linkedBodies.remove(toBeRemoved);
+            repaint();
+        }
+        
     }
 
     @Override
@@ -84,14 +87,16 @@ public class MainPanel extends javax.swing.JPanel implements MouseListener, KeyL
 
     @Override
     public void keyReleased(KeyEvent e) {
-        switch(m_core.getGameController().getState()) {
-            case INITIAL:
-                m_core.getGameController().setState(IGameController.State.RUNNING);
-                break;
-            case YOUWON:
-            case YOULOST:
-                m_core.getGameController().setState(IGameController.State.INITIAL);
-                break;
+        if(e.getKeyCode()==32){
+            switch(m_core.getGameController().getState()) {
+                case INITIAL:
+                    m_core.getGameController().setState(IGameController.State.RUNNING);
+                    break;
+                case YOUWON:
+                case YOULOST:
+                    m_core.getGameController().setState(IGameController.State.INITIAL);
+                    break;
+            }
         }
     }
     

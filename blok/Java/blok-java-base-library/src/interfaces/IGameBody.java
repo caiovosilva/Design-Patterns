@@ -16,8 +16,7 @@ public interface IGameBody {
     
     public enum Type {
         PLAYER,
-        BLOCK,
-        GROUND
+        BLOCK
     }
     
     public Type getType();
