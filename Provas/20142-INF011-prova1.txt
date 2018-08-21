@@ -1,0 +1,5 @@
+01) Implemente um Abstract Factory extensível através do
+uso de um registro de Prototypes. A fábrica deve ser implementada como
+um Singleton e corretamente empacotada. Implemente duas
+fábricas concretas e informe como o cliente faz uso da
+fábrica implementada.
