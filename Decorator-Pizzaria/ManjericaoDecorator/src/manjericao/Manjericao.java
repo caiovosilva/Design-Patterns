@@ -3,24 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package decorator_pizzaria;
+package manjericao;
 
-import interfaces.IComponent;
 import interfaces.PizzaDecorator;
 
 /**
  *
  * @author caiovosilva
  */
-public class ManjericaoDec extends PizzaDecorator{
+public class Manjericao  extends PizzaDecorator{
 
-    @Override
-    protected String adicinarIngrediente() {
-        return "Manjericao";
+    public Manjericao(){
+        ingrediente = "Manjericão";
     }
     
-//    @Override
-//    protected void setDecorated(IComponent decorated) {
-//        this.decorated = decorated;
-//    }
+    @Override
+    protected String adicinarIngrediente() {
+        return ingrediente;
+    }  
+
+    @Override
+    public String toString() {
+        return ingrediente;
+    }
 }

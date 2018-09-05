@@ -3,19 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package decorator_pizzaria;
-
-import interfaces.PizzaDecorator;
+package interfaces;
 
 /**
  *
  * @author caiovosilva
  */
-public class TomateDec extends PizzaDecorator{
-
-    @Override
-    protected String adicinarIngrediente() {
-        return "Tomate";
-    }
+public class Plugin {
     
+    public boolean initialize(){
+        return true;
+    }
 }

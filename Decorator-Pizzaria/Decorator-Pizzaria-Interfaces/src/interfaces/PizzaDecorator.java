@@ -24,7 +24,7 @@ public abstract class PizzaDecorator implements IComponent{
     }
     
     private IComponent decorated;
-    
+    protected String ingrediente;
     
 //    protected abstract String adicinarIngrediente();
 //    
