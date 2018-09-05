@@ -7,6 +7,7 @@ package blok.main;
 
 import concreteclasses.Plugin;
 import interfaces.IPluginController;
+import interfaces.ISimulator;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -25,8 +26,6 @@ import interfaces.ISimulatorFactoryMethod;
 public class PluginController implements IPluginController{
     
     public PluginController() {
-        m_loadedPlugins = new ArrayList<Plugin>();
-        
         File currentDir = new File("./plugins");
         ArrayList<String> lPluginsNames = new ArrayList<>();
         for(File file : currentDir.listFiles()){
@@ -92,6 +91,6 @@ public class PluginController implements IPluginController{
     private URLClassLoader m_ulc;
     private AbstractThemeFactory m_currentTheme; 
     private ISimulatorFactoryMethod m_currentFactorySimulator;
-    private ArrayList<Plugin> m_loadedPlugins;
+    private ArrayList<Plugin> m_loadedPlugins = new ArrayList<Plugin>();
 
 }
