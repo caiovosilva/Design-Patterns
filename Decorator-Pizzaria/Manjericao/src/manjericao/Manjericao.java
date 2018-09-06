@@ -16,11 +16,6 @@ public class Manjericao  extends PizzaDecorator{
     public Manjericao(){
         ingrediente = "Manjericão";
     }
-    
-    @Override
-    protected String adicinarIngrediente() {
-        return ingrediente;
-    }  
 
     @Override
     public String toString() {

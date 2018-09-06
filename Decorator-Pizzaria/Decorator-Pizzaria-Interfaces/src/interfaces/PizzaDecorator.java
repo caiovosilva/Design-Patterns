@@ -13,11 +13,9 @@ public abstract class PizzaDecorator implements IComponent{
 
     @Override
     public String decorar() {
-        return decorated.decorar() + " + " + adicinarIngrediente();
+        return decorated.decorar() + " + " + ingrediente;
     }
-    
-    protected abstract String adicinarIngrediente();
-    
+        
     public void setDecorated(IComponent decorated) {
         this.decorated = decorated;
     }

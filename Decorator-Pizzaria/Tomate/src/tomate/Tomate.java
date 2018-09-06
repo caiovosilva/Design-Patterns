@@ -16,11 +16,6 @@ public class Tomate extends PizzaDecorator{
     public Tomate() {
         ingrediente = "Tomate";
     }
-  
-    @Override
-    protected String adicinarIngrediente() {
-        return ingrediente;
-    }
     
     @Override
     public String toString(){

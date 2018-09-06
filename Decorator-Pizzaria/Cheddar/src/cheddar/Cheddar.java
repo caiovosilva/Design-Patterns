@@ -16,11 +16,6 @@ public class Cheddar extends PizzaDecorator{
     public Cheddar() {
         ingrediente = "Queijo Cheddar";
     }
-  
-    @Override
-    protected String adicinarIngrediente() {
-        return ingrediente;
-    }
     
     @Override
     public String toString(){
