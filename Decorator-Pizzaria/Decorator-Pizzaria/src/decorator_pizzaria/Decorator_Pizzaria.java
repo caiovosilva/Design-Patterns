@@ -30,7 +30,7 @@ public class Decorator_Pizzaria {
         loadDecoratorPlugins();
         ArrayList<String> plugins = getloadedPluginsNames();
         m_mainWindow = new MainWindow();
-        Dimension size = new Dimension(600, 300);
+        Dimension size = new Dimension(600, 350);
         
         m_mainPanel = new MainPanel(loadedDecoratorPlugins);
         m_mainPanel.setPreferredSize(size);

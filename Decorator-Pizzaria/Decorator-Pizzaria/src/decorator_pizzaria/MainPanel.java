@@ -5,10 +5,14 @@
  */
 package decorator_pizzaria;
 
+import interfaces.IComponent;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import interfaces.PizzaDecorator;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 /**
  *
@@ -16,10 +20,6 @@ import javax.swing.ListModel;
  */
 public class MainPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form App
-     * @param listaPlugins
-     */
     private DefaultListModel listaSelecionados;
     
     public MainPanel(List<PizzaDecorator> listaPlugins) {
@@ -160,12 +160,25 @@ public class MainPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        //int index = jList2.getSelectedIndex();//.locationToIndex(evt.getPoint());
-        ListModel dlm = jList2.getModel();
-        PizzaDecorator item = (PizzaDecorator) dlm.getElementAt(index);
-        //locLst.ensureIndexIsVisible(index);
+        IComponent pizza = montarPizza();
+        JOptionPane.showMessageDialog(null, pizza.decorar(), "Sua pizza!", JOptionPane.INFORMATION_MESSAGE); 
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private IComponent montarPizza(){
+        ListModel dlm = jList2.getModel();
+        IComponent pizza = new PizzaSimples();
+        for(Object obj : listaSelecionados.toArray()){
+            try {
+                PizzaDecorator item =  ((PizzaDecorator) obj).getClass().newInstance();
+                item.setDecorated(pizza);
+                pizza = item;
+            }
+            catch (InstantiationException | IllegalAccessException ex) {
+                Logger.getLogger(MainPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return pizza;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
