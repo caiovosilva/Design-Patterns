@@ -41,51 +41,56 @@ public class MainPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btn_Add = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        jButton2 = new javax.swing.JButton();
+        btn_Remove = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList<>();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btn_MoveUp = new javax.swing.JButton();
+        btn_moveDown = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        btn_Ok = new javax.swing.JButton();
 
-        jButton1.setText("ADICIONAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_Add.setText("ADICIONAR");
+        btn_Add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_AddActionPerformed(evt);
             }
         });
 
         jScrollPane1.setViewportView(jList1);
 
-        jButton2.setText("REMOVER");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_Remove.setText("REMOVER");
+        btn_Remove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_RemoveActionPerformed(evt);
             }
         });
 
         jScrollPane2.setViewportView(jList2);
 
-        jButton3.setText("^");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btn_MoveUp.setText("^");
+        btn_MoveUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btn_MoveUpActionPerformed(evt);
             }
         });
 
-        jButton4.setText("v");
+        btn_moveDown.setText("v");
+        btn_moveDown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_moveDownActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("MONTE SUA PIZZA!");
 
-        jButton5.setText("OK");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btn_Ok.setText("OK");
+        btn_Ok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btn_OkActionPerformed(evt);
             }
         });
 
@@ -98,14 +103,14 @@ public class MainPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_Add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_Remove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_MoveUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_moveDown, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(130, 130, 130)
@@ -113,7 +118,7 @@ public class MainPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_Ok, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(120, 120, 120))
         );
         layout.setVerticalGroup(
@@ -124,46 +129,60 @@ public class MainPanel extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btn_Add)
                         .addGap(80, 80, 80)
-                        .addComponent(jButton2)
+                        .addComponent(btn_Remove)
                         .addGap(44, 44, 44))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(btn_MoveUp)
                         .addGap(57, 57, 57)
-                        .addComponent(jButton4)
+                        .addComponent(btn_moveDown)
                         .addGap(71, 71, 71))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(jButton5)
+                .addComponent(btn_Ok)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AddActionPerformed
         if(jList1.getSelectedValue() != null){            
             listaSelecionados.addElement(jList1.getSelectedValue());
             jList2.setModel(listaSelecionados);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_AddActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btn_RemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RemoveActionPerformed
         if(jList2.getSelectedIndex()>-1){
             listaSelecionados.remove(jList2.getLeadSelectionIndex());
             jList2.setModel(listaSelecionados);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn_RemoveActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btn_MoveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MoveUpActionPerformed
+        int selecionado = jList2.getSelectedIndex();
+        if((selecionado > -1) && (selecionado - 1 >= 0))
+            inverterPosicoes(selecionado, selecionado-1);
+    }//GEN-LAST:event_btn_MoveUpActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btn_OkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_OkActionPerformed
         IComponent pizza = montarPizza();
         JOptionPane.showMessageDialog(null, pizza.decorar(), "Sua pizza!", JOptionPane.INFORMATION_MESSAGE); 
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btn_OkActionPerformed
 
+    private void btn_moveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_moveDownActionPerformed
+        int selecionado = jList2.getSelectedIndex();
+        if((selecionado > -1) && (selecionado + 1 < listaSelecionados.size()))
+            inverterPosicoes(selecionado, selecionado+1);
+    }//GEN-LAST:event_btn_moveDownActionPerformed
+
+    private void inverterPosicoes(int a, int b){
+        Object item = listaSelecionados.getElementAt(a);
+        listaSelecionados.setElementAt(listaSelecionados.getElementAt(b), a);
+        listaSelecionados.setElementAt(item, b);
+        jList2.setModel(listaSelecionados);
+    }
     private IComponent montarPizza(){
         ListModel dlm = jList2.getModel();
         IComponent pizza = new PizzaSimples();
@@ -181,11 +200,11 @@ public class MainPanel extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton btn_Add;
+    private javax.swing.JButton btn_MoveUp;
+    private javax.swing.JButton btn_Ok;
+    private javax.swing.JButton btn_Remove;
+    private javax.swing.JButton btn_moveDown;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList<String> jList1;
     private javax.swing.JList<String> jList2;
