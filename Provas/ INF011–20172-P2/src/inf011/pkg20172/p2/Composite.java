@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package compositeexemplo;
+package inf011.pkg20172.p2;
 
 import interfaces.IComponent;
 import java.util.ArrayList;
@@ -18,11 +18,12 @@ public class Composite implements IComponent{
         components = new ArrayList<>();
     }
     
-    @Override
-    public void risePrice(double percentage) {
-        for(IComponent component : components){
-            component.risePrice(percentage);
-        }
+    public Composite(IComponent component){
+        this();
+        addComponent(component);
+    }
+    public void realizarLimpeza() {
+        components = new ArrayList<>();
     }
     
     public void addComponent(IComponent component){
@@ -34,4 +35,13 @@ public class Composite implements IComponent{
     }
     
     private ArrayList<IComponent> components;
+
+    @Override
+    public void listar() {
+        if(components.size()==0)
+            System.out.println("nenhum item na arvore");
+        for(IComponent component : components){
+            component.listar();
+        }
+    }
 }
