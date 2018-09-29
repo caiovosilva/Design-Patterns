@@ -16,6 +16,7 @@ public:
 
 private slots:
     void digitClicked();
+    void unaryOperatorClicked();
     void additiveOperatorClicked();
     void multiplicativeOperatorClicked();
     void equalClicked();
@@ -24,6 +25,10 @@ private slots:
     void backspaceClicked();
     void clear();
     void clearAll();
+    void clearMemory();
+    void readMemory();
+    void setMemory();
+    void addToMemory();
 
 private:
     Button *createButton(const QString &text, const char *member);

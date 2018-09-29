@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     waitingForOperand = true;
 
     display = ui->display;
-    display = new QLineEdit("0");
+    display->setText("0");
     display->setReadOnly(true);
     display->setAlignment(Qt::AlignRight);
 
