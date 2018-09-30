@@ -1,10 +1,11 @@
 #include "operationmade.h"
 
-OperationMade::OperationMade(const double oldPos, QUndoCommand *parent)
+OperationMade::OperationMade(const double oldValue, const double rightOperand,  const QString &pendingOperator, QUndoCommand *parent)
     : QUndoCommand(parent)
 {
-    newPos = 1;//iagramItem->pos();
-    myOldPos = oldPos;
+    this->oldValue = oldValue;
+    this->rightOperand = rightOperand;
+    this->pendingOperator = pendingOperator;
 }
 
 void OperationMade::undo()
@@ -17,9 +18,19 @@ void OperationMade::undo()
 
 void OperationMade::redo()
 {
-//    myDiagramItem->setPos(newPos);
-//    setText(QObject::tr("Move %1")
-//        .arg(createCommandString(myDiagramItem, newPos)));
+    if (pendingOperator == tr("+")) {
+        newValue += rightOperand;
+    } else if (pendingOperator == tr("-")) {
+        newValue -= rightOperand;
+    } else if (pendingOperator == tr("\303\227")) {
+        newValue *= rightOperand;
+    } else if (pendingOperator == tr("\303\267")) {
+        if (rightOperand == 0.0){
+            validOperation = false;
+            return;
+        }
+        newValue /= rightOperand;
+    }
 }
 
 bool OperationMade::mergeWith(const QUndoCommand *command)

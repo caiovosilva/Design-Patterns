@@ -87,8 +87,8 @@ Calculator::Calculator(QWidget *parent)
 void Calculator::digitClicked()
 {
     Button *clickedButton = qobject_cast<Button *>(sender());
-    int digitValue = clickedButton->text().toInt();
-    if (display->text() == "0" && digitValue == 0.0)
+     int digitValue = clickedButton->text()[1].digitValue();
+     if (display->text() == "0" && digitValue == 0.0)
         return;
 
     if (waitingForOperand) {
