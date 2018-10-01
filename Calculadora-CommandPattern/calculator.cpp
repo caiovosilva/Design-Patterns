@@ -4,13 +4,15 @@
 
 #include "button.h"
 #include "calculator.h"
+#include "operationmade.h"
 
 Calculator::Calculator(QWidget *parent)
     : QWidget(parent)
 {
+    undoStack = new QUndoStack(this);
+
     sumInMemory = 0.0;
-    sumSoFar = 0.0;
-    factorSoFar = 0.0;
+    result = 0.0;
     waitingForOperand = true;
 
     display = new QLineEdit("0");
@@ -135,9 +137,9 @@ void Calculator::additiveOperatorClicked()
             abortOperation();
             return;
         }
-        display->setText(QString::number(factorSoFar));
-        operand = factorSoFar;
-        factorSoFar = 0.0;
+        display->setText(QString::number(result));
+        operand = result;
+        result = 0.0;
         pendingMultiplicativeOperator.clear();
     }
 
@@ -146,9 +148,9 @@ void Calculator::additiveOperatorClicked()
             abortOperation();
             return;
         }
-        display->setText(QString::number(sumSoFar));
+        display->setText(QString::number(result));
     } else {
-        sumSoFar = operand;
+        result = operand;
     }
 
     pendingAdditiveOperator = clickedOperator;
@@ -166,9 +168,9 @@ void Calculator::multiplicativeOperatorClicked()
             abortOperation();
             return;
         }
-        display->setText(QString::number(factorSoFar));
+        display->setText(QString::number(result));
     } else {
-        factorSoFar = operand;
+        result = operand;
     }
 
     pendingMultiplicativeOperator = clickedOperator;
@@ -184,8 +186,8 @@ void Calculator::equalClicked()
             abortOperation();
             return;
         }
-        operand = factorSoFar;
-        factorSoFar = 0.0;
+        operand = result;
+        result = 0.0;
         pendingMultiplicativeOperator.clear();
     }
     if (!pendingAdditiveOperator.isEmpty()) {
@@ -195,11 +197,11 @@ void Calculator::equalClicked()
         }
         pendingAdditiveOperator.clear();
     } else {
-        sumSoFar = operand;
+        result = operand;
     }
 
-    display->setText(QString::number(sumSoFar));
-    sumSoFar = 0.0;
+    display->setText(QString::number(result));
+    result = 0.0;
     waitingForOperand = true;
 }
 
@@ -250,8 +252,7 @@ void Calculator::clear()
 
 void Calculator::clearAll()
 {
-    sumSoFar = 0.0;
-    factorSoFar = 0.0;
+    result = 0.0;
     pendingAdditiveOperator.clear();
     pendingMultiplicativeOperator.clear();
     display->setText("0");
@@ -295,16 +296,17 @@ void Calculator::abortOperation()
 
 bool Calculator::calculate(double rightOperand, const QString &pendingOperator)
 {
+    //undoStack->push(new OperationMade(movedItem, oldPosition));
     if (pendingOperator == tr("+")) {
-        sumSoFar += rightOperand;
+        result += rightOperand;
     } else if (pendingOperator == tr("-")) {
-        sumSoFar -= rightOperand;
+        result -= rightOperand;
     } else if (pendingOperator == tr("\303\227")) {
-        factorSoFar *= rightOperand;
+        result *= rightOperand;
     } else if (pendingOperator == tr("\303\267")) {
         if (rightOperand == 0.0)
             return false;
-        factorSoFar /= rightOperand;
+        result /= rightOperand;
     }
     return true;
 }

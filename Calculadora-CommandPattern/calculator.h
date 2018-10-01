@@ -2,7 +2,7 @@
 #define CALCULATOR_H
 
 #include <QWidget>
-
+#include <QUndoStack>
 class QLineEdit;
 
 class Button;
@@ -36,8 +36,7 @@ private:
     bool calculate(double rightOperand, const QString &pendingOperator);
 
     double sumInMemory;
-    double sumSoFar;
-    double factorSoFar;
+    double result;
     QString pendingAdditiveOperator;
     QString pendingMultiplicativeOperator;
     bool waitingForOperand;
@@ -46,6 +45,8 @@ private:
 
     enum { NumDigitButtons = 10 };
     Button *digitButtons[NumDigitButtons];
+
+    QUndoStack *undoStack;
 };
 
 #endif

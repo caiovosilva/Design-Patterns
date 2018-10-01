@@ -1,6 +1,6 @@
 #include "operationmade.h"
 
-OperationMade::OperationMade(const double oldValue, const double rightOperand,  const QString &pendingOperator, QUndoCommand *parent)
+OperationMade::OperationMade(double *oldValue, double rightOperand,  const QString &pendingOperator, QUndoCommand *parent)
     : QUndoCommand(parent)
 {
     this->oldValue = oldValue;
@@ -18,19 +18,19 @@ void OperationMade::undo()
 
 void OperationMade::redo()
 {
-    if (pendingOperator == tr("+")) {
-        newValue += rightOperand;
-    } else if (pendingOperator == tr("-")) {
-        newValue -= rightOperand;
-    } else if (pendingOperator == tr("\303\227")) {
-        newValue *= rightOperand;
-    } else if (pendingOperator == tr("\303\267")) {
-        if (rightOperand == 0.0){
-            validOperation = false;
-            return;
-        }
-        newValue /= rightOperand;
-    }
+//    if (pendingOperator == tr("+")) {
+//        newValue += rightOperand;
+//    } else if (pendingOperator == tr("-")) {
+//        newValue -= rightOperand;
+//    } else if (pendingOperator == tr("\303\227")) {
+//        newValue *= rightOperand;
+//    } else if (pendingOperator == tr("\303\267")) {
+//        if (rightOperand == 0.0){
+//            validOperation = false;
+//            return;
+//        }
+//        newValue /= rightOperand;
+//    }
 }
 
 bool OperationMade::mergeWith(const QUndoCommand *command)

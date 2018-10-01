@@ -5,10 +5,12 @@
 
 class OperationMade : public QUndoCommand
 {
+    //Q_OBJECT
+
 public:
     enum { Id = 1234 };
 
-    OperationMade(const double oldValue, const double rightOperand,  const QString &pendingOperator,
+    OperationMade(double *oldValue, double rightOperand,  const QString &pendingOperator,
                 QUndoCommand *parent = 0);
 
     void undo() override;
@@ -17,7 +19,7 @@ public:
     int id() const override { return Id; }
     bool validOperation;
 private:
-    double oldValue;
+    double *oldValue;
     double rightOperand;
     double newValue;
     QString pendingOperator;
