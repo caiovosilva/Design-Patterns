@@ -26,6 +26,7 @@ private slots:
     void backspaceClicked();
     void clear();
     void undo();
+    void redo();
     void clearAll();
     void clearMemory();
     void readMemory();

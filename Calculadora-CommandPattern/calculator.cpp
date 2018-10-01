@@ -33,7 +33,7 @@ Calculator::Calculator(QWidget *parent)
 
     Button *backspaceButton = createButton(tr("Backspace"), SLOT(backspaceClicked()));
     Button *undoButton = createButton(tr("Undo"), SLOT(undo()));
-    Button *clearAllButton = createButton(tr("Clear All"), SLOT(clearAll()));
+    Button *redoButton = createButton(tr("Redo"), SLOT(redo()));
 
     Button *clearMemoryButton = createButton(tr("MC"), SLOT(clearMemory()));
     Button *readMemoryButton = createButton(tr("MR"), SLOT(readMemory()));
@@ -55,7 +55,7 @@ Calculator::Calculator(QWidget *parent)
     mainLayout->addWidget(display, 0, 0, 1, 6);
     mainLayout->addWidget(backspaceButton, 1, 0, 1, 2);
     mainLayout->addWidget(undoButton, 1, 2, 1, 2);
-    mainLayout->addWidget(clearAllButton, 1, 4, 1, 2);
+    mainLayout->addWidget(redoButton, 1, 4, 1, 2);
 
     mainLayout->addWidget(clearMemoryButton, 2, 0);
     mainLayout->addWidget(readMemoryButton, 3, 0);
@@ -317,5 +317,12 @@ void Calculator::undo()
 {
     if(undoStack->canUndo())
         undoStack->undo();
+    display->setText(QString::number(result));
+}
+
+void Calculator::redo()
+{
+    if(undoStack->canRedo())
+        undoStack->redo();
     display->setText(QString::number(result));
 }
