@@ -13,6 +13,7 @@ class Calculator : public QWidget
 
 public:
     Calculator(QWidget *parent = 0);
+    void abortOperation();
 
 private slots:
     void digitClicked();
@@ -24,6 +25,7 @@ private slots:
     void changeSignClicked();
     void backspaceClicked();
     void clear();
+    void undo();
     void clearAll();
     void clearMemory();
     void readMemory();
@@ -32,7 +34,6 @@ private slots:
 
 private:
     Button *createButton(const QString &text, const char *member);
-    void abortOperation();
     bool calculate(double rightOperand, const QString &pendingOperator);
 
     double sumInMemory;

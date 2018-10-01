@@ -32,7 +32,7 @@ Calculator::Calculator(QWidget *parent)
     Button *changeSignButton = createButton(tr("\302\261"), SLOT(changeSignClicked()));
 
     Button *backspaceButton = createButton(tr("Backspace"), SLOT(backspaceClicked()));
-    Button *clearButton = createButton(tr("Clear"), SLOT(clear()));
+    Button *undoButton = createButton(tr("Undo"), SLOT(undo()));
     Button *clearAllButton = createButton(tr("Clear All"), SLOT(clearAll()));
 
     Button *clearMemoryButton = createButton(tr("MC"), SLOT(clearMemory()));
@@ -54,7 +54,7 @@ Calculator::Calculator(QWidget *parent)
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
     mainLayout->addWidget(display, 0, 0, 1, 6);
     mainLayout->addWidget(backspaceButton, 1, 0, 1, 2);
-    mainLayout->addWidget(clearButton, 1, 2, 1, 2);
+    mainLayout->addWidget(undoButton, 1, 2, 1, 2);
     mainLayout->addWidget(clearAllButton, 1, 4, 1, 2);
 
     mainLayout->addWidget(clearMemoryButton, 2, 0);
@@ -185,7 +185,8 @@ void Calculator::equalClicked()
         if (!calculate(operand, pendingMultiplicativeOperator)) {
             abortOperation();
             return;
-        }
+       }
+
         operand = result;
         result = 0.0;
         pendingMultiplicativeOperator.clear();
@@ -250,15 +251,6 @@ void Calculator::clear()
     waitingForOperand = true;
 }
 
-void Calculator::clearAll()
-{
-    result = 0.0;
-    pendingAdditiveOperator.clear();
-    pendingMultiplicativeOperator.clear();
-    display->setText("0");
-    waitingForOperand = true;
-}
-
 void Calculator::clearMemory()
 {
     sumInMemory = 0.0;
@@ -294,19 +286,36 @@ void Calculator::abortOperation()
     display->setText(tr("####"));
 }
 
+void Calculator::clearAll()
+{
+    result = 0.0;
+    pendingAdditiveOperator.clear();
+    pendingMultiplicativeOperator.clear();
+    display->setText("0");
+    waitingForOperand = true;
+}
+
 bool Calculator::calculate(double rightOperand, const QString &pendingOperator)
 {
-    //undoStack->push(new OperationMade(movedItem, oldPosition));
-    if (pendingOperator == tr("+")) {
-        result += rightOperand;
-    } else if (pendingOperator == tr("-")) {
-        result -= rightOperand;
-    } else if (pendingOperator == tr("\303\227")) {
-        result *= rightOperand;
-    } else if (pendingOperator == tr("\303\267")) {
-        if (rightOperand == 0.0)
-            return false;
-        result /= rightOperand;
-    }
+    undoStack->push(new OperationMade(&result, rightOperand, pendingOperator));
     return true;
+//    if (pendingOperator == tr("+")) {
+//        result += rightOperand;
+//    } else if (pendingOperator == tr("-")) {
+//        result -= rightOperand;
+//    } else if (pendingOperator == tr("\303\227")) {
+//        result *= rightOperand;
+//    } else if (pendingOperator == tr("\303\267")) {
+//        if (rightOperand == 0.0)
+//            return false;
+//        result /= rightOperand;
+//    }
+//    return true;
+}
+
+void Calculator::undo()
+{
+    if(undoStack->canUndo())
+        undoStack->undo();
+    display->setText(QString::number(result));
 }

@@ -1,27 +1,29 @@
 #ifndef OPERATIONMADE_H
 #define OPERATIONMADE_H
 
+#include "calculator.h"
 #include <QUndoCommand>
 
-class OperationMade : public QUndoCommand
+class OperationMade : public QObject, public QUndoCommand
 {
-    //Q_OBJECT
+    Q_OBJECT
 
 public:
     enum { Id = 1234 };
 
-    OperationMade(double *oldValue, double rightOperand,  const QString &pendingOperator,
+    OperationMade(double *numberOnDisplay, double rightOperand, const QString &pendingOperator,
                 QUndoCommand *parent = 0);
 
     void undo() override;
     void redo() override;
-    bool mergeWith(const QUndoCommand *command) override;
     int id() const override { return Id; }
-    bool validOperation;
+    bool isValidOperation();
 private:
-    double *oldValue;
+    double *numberOnDisplay;
+    double oldValue;
     double rightOperand;
-    double newValue;
+    bool validOperation;
+    //Calculator calc;
     QString pendingOperator;
 };
 
