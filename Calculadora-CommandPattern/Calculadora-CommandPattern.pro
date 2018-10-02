@@ -25,13 +25,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp \
     calculator.cpp \
     button.cpp \
     operationmade.cpp
 
 HEADERS += \
-        mainwindow.h \
     calculator.h \
     button.h \
     operationmade.h
