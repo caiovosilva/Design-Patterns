@@ -186,7 +186,7 @@ void Calculator::equalClicked()
     }
 
     display->setText(QString::number(result));
-    result = 0.0;
+    //result = 0.0;
     waitingForOperand = true;
 }
 
