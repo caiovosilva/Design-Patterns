@@ -133,10 +133,7 @@ void Calculator::additiveOperatorClicked()
     double operand = display->text().toDouble();
 
     if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            abortOperation();
-            return;
-        }
+        calculate(operand, pendingMultiplicativeOperator);
         display->setText(QString::number(result));
         operand = result;
         result = 0.0;
@@ -144,10 +141,7 @@ void Calculator::additiveOperatorClicked()
     }
 
     if (!pendingAdditiveOperator.isEmpty()) {
-        if (!calculate(operand, pendingAdditiveOperator)) {
-            abortOperation();
-            return;
-        }
+        calculate(operand, pendingAdditiveOperator);
         display->setText(QString::number(result));
     } else {
         result = operand;
@@ -164,10 +158,7 @@ void Calculator::multiplicativeOperatorClicked()
     double operand = display->text().toDouble();
 
     if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            abortOperation();
-            return;
-        }
+        calculate(operand, pendingMultiplicativeOperator);
         display->setText(QString::number(result));
     } else {
         result = operand;
@@ -182,20 +173,13 @@ void Calculator::equalClicked()
     double operand = display->text().toDouble();
 
     if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            abortOperation();
-            return;
-       }
-
+        calculate(operand, pendingMultiplicativeOperator);
         operand = result;
         result = 0.0;
         pendingMultiplicativeOperator.clear();
     }
     if (!pendingAdditiveOperator.isEmpty()) {
-        if (!calculate(operand, pendingAdditiveOperator)) {
-            abortOperation();
-            return;
-        }
+        calculate(operand, pendingAdditiveOperator);
         pendingAdditiveOperator.clear();
     } else {
         result = operand;
@@ -295,22 +279,9 @@ void Calculator::clearAll()
     waitingForOperand = true;
 }
 
-bool Calculator::calculate(double rightOperand, const QString &pendingOperator)
+void Calculator::calculate(double rightOperand, const QString &pendingOperator)
 {
     undoStack->push(new OperationMade(&result, rightOperand, pendingOperator));
-    return true;
-//    if (pendingOperator == tr("+")) {
-//        result += rightOperand;
-//    } else if (pendingOperator == tr("-")) {
-//        result -= rightOperand;
-//    } else if (pendingOperator == tr("\303\227")) {
-//        result *= rightOperand;
-//    } else if (pendingOperator == tr("\303\267")) {
-//        if (rightOperand == 0.0)
-//            return false;
-//        result /= rightOperand;
-//    }
-//    return true;
 }
 
 void Calculator::undo()

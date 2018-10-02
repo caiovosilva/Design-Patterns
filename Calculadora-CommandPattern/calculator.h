@@ -35,7 +35,7 @@ private slots:
 
 private:
     Button *createButton(const QString &text, const char *member);
-    bool calculate(double rightOperand, const QString &pendingOperator);
+    void calculate(double rightOperand, const QString &pendingOperator);
 
     double sumInMemory;
     double result;
