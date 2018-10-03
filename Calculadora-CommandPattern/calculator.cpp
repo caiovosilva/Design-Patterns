@@ -286,14 +286,16 @@ void Calculator::calculate(double rightOperand, const QString &pendingOperator)
 
 void Calculator::undo()
 {
-    if(undoStack->canUndo())
+    if(undoStack->canUndo()){
         undoStack->undo();
-    display->setText(QString::number(result));
+        display->setText(QString::number(result));
+    }
 }
 
 void Calculator::redo()
 {
-    if(undoStack->canRedo())
+    if(undoStack->canRedo()){
         undoStack->redo();
-    display->setText(QString::number(result));
+        display->setText(QString::number(result));
+    }
 }
