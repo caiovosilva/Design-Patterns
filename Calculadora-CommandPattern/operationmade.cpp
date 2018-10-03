@@ -4,7 +4,6 @@ OperationMade::OperationMade(double *numberOnDisplay, double rightOperand,
                              const QString &pendingOperator, QUndoCommand *parent)
     : QUndoCommand(parent)
 {
-    //this->calc = calc;
     this->numberOnDisplay = numberOnDisplay;
     this->rightOperand = rightOperand;
     this->pendingOperator = pendingOperator;
