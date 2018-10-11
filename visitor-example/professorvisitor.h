@@ -11,6 +11,8 @@ public:
     ProfessorVisitor();
     void visitProfessor(Professor *professor);
     double getMedia();
+    QString toString();
+
 private:
     double somaPublicacoes;
     int numProfessores;

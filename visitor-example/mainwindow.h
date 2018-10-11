@@ -2,6 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QList>
+
+#include "ielement.h"
+#include "ivisitor.h"
+
+//class IElement;
+//class IVisitor;
 
 namespace Ui {
 class MainWindow;
@@ -16,7 +23,10 @@ public:
     ~MainWindow();
 
 private:
+    void Run();
     Ui::MainWindow *ui;
+    QList<IElement*> elementList;
+    QList<IVisitor*> visitorList;
 };
 
 #endif // MAINWINDOW_H

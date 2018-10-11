@@ -8,6 +8,7 @@ class IVisitor;
 class Professor : public IElement
 {
 public:
+    Professor(int numeroPublicacoes);
     void Accept(IVisitor *v);
     int getNumeroPublicacoes();
 private:

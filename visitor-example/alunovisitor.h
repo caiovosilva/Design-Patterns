@@ -4,12 +4,13 @@
 #include "ivisitor.h"
 class Aluno;
 
-class AlunoVisitor
+class AlunoVisitor : public IVisitor
 {
 public:
     AlunoVisitor();
     void visitAluno(Aluno *aluno);
     double getMedia();
+    QString toString();
 private:
     double somaNotas;
     int numAlunos;

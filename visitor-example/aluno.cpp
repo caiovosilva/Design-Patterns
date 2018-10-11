@@ -1,7 +1,14 @@
 #include "aluno.h"
 #include "ivisitor.h"
 
-void Aluno::Accept(IVisitor *v){
+Aluno::Aluno(double nota)
+    : nota(nota)
+{
+
+}
+
+void Aluno::Accept(IVisitor *v)
+{
     v->visitAluno(this);
 }
 

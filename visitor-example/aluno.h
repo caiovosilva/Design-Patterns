@@ -8,6 +8,7 @@ class IVisitor;
 class Aluno : public IElement
 {
 public:
+    Aluno(double nota);
     void Accept(IVisitor *v);
     double getNota();
 private:

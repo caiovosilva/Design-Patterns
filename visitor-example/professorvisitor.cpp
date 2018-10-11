@@ -16,3 +16,8 @@ double ProfessorVisitor::getMedia()
 {
     return somaPublicacoes/numProfessores;
 }
+
+QString ProfessorVisitor::toString()
+{
+    return "A média das publicações dos professores é: "+QString::number(getMedia());
+}

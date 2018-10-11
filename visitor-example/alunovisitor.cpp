@@ -17,3 +17,8 @@ double AlunoVisitor::getMedia()
 {
     return somaNotas / numAlunos;
 }
+
+QString AlunoVisitor::toString()
+{
+    return "A média dos alunos é: "+QString::number(getMedia());
+}
