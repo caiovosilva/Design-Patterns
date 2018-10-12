@@ -23,7 +23,7 @@ public:
     ~MainWindow();
 
 private:
-    void Run();
+    void run();
     Ui::MainWindow *ui;
     QList<IElement*> elementList;
     QList<IVisitor*> visitorList;

@@ -4,7 +4,8 @@
 
 #include "button.h"
 #include "calculator.h"
-#include "operationmade.h"
+#include "addoperation.h"
+#include "multiplyoperation.h"
 
 Calculator::Calculator(QWidget *parent)
     : QWidget(parent)
@@ -281,7 +282,14 @@ void Calculator::clearAll()
 
 void Calculator::calculate(double rightOperand, const QString &pendingOperator)
 {
-    undoStack->push(new OperationMade(&result, rightOperand, pendingOperator));
+    if (pendingOperator == tr("\303\267") || pendingOperator == tr("\303\227")) {
+        if (rightOperand == 0.0){
+            return;
+        }
+        undoStack->push(new MultiplyOperation(&result, rightOperand));
+    } else {
+        undoStack->push(new AddOperation(&result, rightOperand));
+    }
 }
 
 void Calculator::undo()

@@ -1,10 +1,10 @@
 #include "alunovisitor.h"
 #include "aluno.h"
 
-AlunoVisitor::AlunoVisitor()
+AlunoVisitor::AlunoVisitor() :
+    numAlunos(0),
+    somaNotas(0)
 {
-    numAlunos = 0;
-    somaNotas = 0;
 }
 
 void AlunoVisitor::visitAluno(Aluno *aluno)

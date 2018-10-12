@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    Run();
+    run();
 }
 
 MainWindow::~MainWindow()
@@ -20,15 +20,11 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::Run()
+void MainWindow::run()
 {
     for(int i=1;i<11;i++)
     {
         elementList.append(new Aluno(i));
-    }
-
-    for(int i=0;i<11;i=i+2)
-    {
         elementList.append(new Professor(i));
     }
 

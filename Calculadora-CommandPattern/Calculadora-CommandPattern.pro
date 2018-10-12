@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
     calculator.cpp \
     button.cpp \
-    operationmade.cpp
+    addoperation.cpp \
+    multiplyoperation.cpp
 
 HEADERS += \
     calculator.h \
     button.h \
-    operationmade.h
+    addoperation.h \
+    multiplyoperation.h
 
 FORMS += \
         mainwindow.ui

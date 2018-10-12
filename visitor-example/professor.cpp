@@ -1,8 +1,8 @@
 #include "professor.h"
 #include "ivisitor.h"
 
-Professor::Professor(int numeroPublicacoes)
-    : numeroPublicacoes(numeroPublicacoes)
+Professor::Professor(int numeroPublicacoes) :
+    numeroPublicacoes(numeroPublicacoes)
 {
 
 }
