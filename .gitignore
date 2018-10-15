@@ -219,3 +219,5 @@ CMakeLists.txt.user*
 /basic-iterator/build/
 /generic-iterator/nbproject/private/
 /generic-iterator/build/
+/template-method-example/nbproject/private/
+/template-method-example/build/
